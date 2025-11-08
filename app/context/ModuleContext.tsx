@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
-export type ModuleType = 'pos' | 'hrm' | 'account';
+export type ModuleType = "pos" | "hrm" | "account";
 
 interface ModuleContextType {
   currentModule: ModuleType;
@@ -10,14 +10,14 @@ interface ModuleContextType {
 }
 
 const ModuleContext = createContext<ModuleContextType>({
-  currentModule: 'pos',
+  currentModule: "pos",
   setCurrentModule: () => {},
 });
 
 export const useModule = () => useContext(ModuleContext);
 
 export function ModuleProvider({ children }: { children: React.ReactNode }) {
-  const [currentModule, setCurrentModule] = useState<ModuleType>('pos');
+  const [currentModule, setCurrentModule] = useState<ModuleType>("pos");
 
   return (
     <ModuleContext.Provider value={{ currentModule, setCurrentModule }}>

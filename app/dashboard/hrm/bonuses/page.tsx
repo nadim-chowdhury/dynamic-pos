@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Button,
@@ -18,7 +18,7 @@ import {
   Col,
   Card,
   Statistic,
-} from 'antd';
+} from "antd";
 import {
   EyeOutlined,
   EditOutlined,
@@ -30,11 +30,13 @@ import {
   CheckCircleOutlined,
   ClockCircleOutlined,
   CloseCircleOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import DynamicTable, { DynamicTableColumn } from '../../../components/DynamicTable';
-import DynamicModal from '../../../components/DynamicModal';
-import dayjs, { Dayjs } from 'dayjs';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import DynamicTable, {
+  DynamicTableColumn,
+} from "../../../components/DynamicTable";
+import DynamicModal from "../../../components/DynamicModal";
+import dayjs, { Dayjs } from "dayjs";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -50,7 +52,7 @@ interface Bonus {
   amount: number;
   date: string;
   reason: string;
-  status: 'approved' | 'pending' | 'rejected';
+  status: "approved" | "pending" | "rejected";
   approvedBy?: string;
   avatar?: string;
 }
@@ -58,105 +60,105 @@ interface Bonus {
 // Demo bonus data
 const demoBonuses: Bonus[] = [
   {
-    key: '1',
-    bonusId: 'BON-001',
-    employeeId: 'EMP-001',
-    employeeName: 'John Doe',
-    department: 'Sales',
-    bonusType: 'Performance Bonus',
+    key: "1",
+    bonusId: "BON-001",
+    employeeId: "EMP-001",
+    employeeName: "John Doe",
+    department: "Sales",
+    bonusType: "Performance Bonus",
     amount: 5000,
-    date: '2024-01-15',
-    reason: 'Exceeded quarterly sales target by 150%',
-    status: 'approved',
-    approvedBy: 'Emily Davis',
+    date: "2024-01-15",
+    reason: "Exceeded quarterly sales target by 150%",
+    status: "approved",
+    approvedBy: "Emily Davis",
   },
   {
-    key: '2',
-    bonusId: 'BON-002',
-    employeeId: 'EMP-002',
-    employeeName: 'Sarah Johnson',
-    department: 'Sales',
-    bonusType: 'Performance Bonus',
+    key: "2",
+    bonusId: "BON-002",
+    employeeId: "EMP-002",
+    employeeName: "Sarah Johnson",
+    department: "Sales",
+    bonusType: "Performance Bonus",
     amount: 2000,
-    date: '2024-01-15',
-    reason: 'Excellent customer service ratings',
-    status: 'approved',
-    approvedBy: 'Emily Davis',
+    date: "2024-01-15",
+    reason: "Excellent customer service ratings",
+    status: "approved",
+    approvedBy: "Emily Davis",
   },
   {
-    key: '3',
-    bonusId: 'BON-003',
-    employeeId: 'EMP-003',
-    employeeName: 'Mike Brown',
-    department: 'IT',
-    bonusType: 'Project Completion',
+    key: "3",
+    bonusId: "BON-003",
+    employeeId: "EMP-003",
+    employeeName: "Mike Brown",
+    department: "IT",
+    bonusType: "Project Completion",
     amount: 6000,
-    date: '2024-01-20',
-    reason: 'Successfully implemented new POS system',
-    status: 'approved',
-    approvedBy: 'Emily Davis',
+    date: "2024-01-20",
+    reason: "Successfully implemented new POS system",
+    status: "approved",
+    approvedBy: "Emily Davis",
   },
   {
-    key: '4',
-    bonusId: 'BON-004',
-    employeeId: 'EMP-004',
-    employeeName: 'Emily Davis',
-    department: 'HR',
-    bonusType: 'Annual Bonus',
+    key: "4",
+    bonusId: "BON-004",
+    employeeId: "EMP-004",
+    employeeName: "Emily Davis",
+    department: "HR",
+    bonusType: "Annual Bonus",
     amount: 10000,
-    date: '2023-12-31',
-    reason: 'Year-end bonus for excellent leadership',
-    status: 'approved',
-    approvedBy: 'CEO',
+    date: "2023-12-31",
+    reason: "Year-end bonus for excellent leadership",
+    status: "approved",
+    approvedBy: "CEO",
   },
   {
-    key: '5',
-    bonusId: 'BON-005',
-    employeeId: 'EMP-005',
-    employeeName: 'Robert Taylor',
-    department: 'Finance',
-    bonusType: 'Performance Bonus',
+    key: "5",
+    bonusId: "BON-005",
+    employeeId: "EMP-005",
+    employeeName: "Robert Taylor",
+    department: "Finance",
+    bonusType: "Performance Bonus",
     amount: 4000,
-    date: '2024-01-10',
-    reason: 'Successful financial audit with zero discrepancies',
-    status: 'approved',
-    approvedBy: 'Emily Davis',
+    date: "2024-01-10",
+    reason: "Successful financial audit with zero discrepancies",
+    status: "approved",
+    approvedBy: "Emily Davis",
   },
   {
-    key: '6',
-    bonusId: 'BON-006',
-    employeeId: 'EMP-006',
-    employeeName: 'Lisa Anderson',
-    department: 'Sales',
-    bonusType: 'Spot Bonus',
+    key: "6",
+    bonusId: "BON-006",
+    employeeId: "EMP-006",
+    employeeName: "Lisa Anderson",
+    department: "Sales",
+    bonusType: "Spot Bonus",
     amount: 1000,
-    date: '2024-02-01',
-    reason: 'Handled difficult customer situation professionally',
-    status: 'pending',
+    date: "2024-02-01",
+    reason: "Handled difficult customer situation professionally",
+    status: "pending",
   },
   {
-    key: '7',
-    bonusId: 'BON-007',
-    employeeId: 'EMP-007',
-    employeeName: 'David Wilson',
-    department: 'Operations',
-    bonusType: 'Performance Bonus',
+    key: "7",
+    bonusId: "BON-007",
+    employeeId: "EMP-007",
+    employeeName: "David Wilson",
+    department: "Operations",
+    bonusType: "Performance Bonus",
     amount: 3500,
-    date: '2024-02-05',
-    reason: 'Improved warehouse efficiency by 30%',
-    status: 'pending',
+    date: "2024-02-05",
+    reason: "Improved warehouse efficiency by 30%",
+    status: "pending",
   },
   {
-    key: '8',
-    bonusId: 'BON-008',
-    employeeId: 'EMP-008',
-    employeeName: 'Jennifer Martinez',
-    department: 'Marketing',
-    bonusType: 'Campaign Success',
+    key: "8",
+    bonusId: "BON-008",
+    employeeId: "EMP-008",
+    employeeName: "Jennifer Martinez",
+    department: "Marketing",
+    bonusType: "Campaign Success",
     amount: 2500,
-    date: '2023-12-15',
-    reason: 'Marketing campaign increased sales by 40%',
-    status: 'rejected',
+    date: "2023-12-15",
+    reason: "Marketing campaign increased sales by 40%",
+    status: "rejected",
   },
 ];
 
@@ -183,8 +185,8 @@ export default function BonusesPage() {
   };
 
   const handleDelete = (record: Bonus) => {
-    if (record.status === 'approved') {
-      message.warning('Cannot delete approved bonuses');
+    if (record.status === "approved") {
+      message.warning("Cannot delete approved bonuses");
       return;
     }
     message.success(`Bonus ${record.bonusId} deleted successfully`);
@@ -203,12 +205,12 @@ export default function BonusesPage() {
           ? {
               ...bonus,
               ...values,
-              date: values.date.format('YYYY-MM-DD'),
+              date: values.date.format("YYYY-MM-DD"),
             }
           : bonus
       );
       setBonuses(updatedBonuses);
-      message.success('Bonus updated successfully');
+      message.success("Bonus updated successfully");
       setIsEditModalOpen(false);
       form.resetFields();
     });
@@ -219,81 +221,81 @@ export default function BonusesPage() {
       const newBonus: Bonus = {
         ...values,
         key: String(bonuses.length + 1),
-        bonusId: `BON-${String(bonuses.length + 1).padStart(3, '0')}`,
-        date: values.date.format('YYYY-MM-DD'),
-        status: 'pending',
+        bonusId: `BON-${String(bonuses.length + 1).padStart(3, "0")}`,
+        date: values.date.format("YYYY-MM-DD"),
+        status: "pending",
       };
       setBonuses([...bonuses, newBonus]);
-      message.success('Bonus added successfully');
+      message.success("Bonus added successfully");
       setIsAddModalOpen(false);
       form.resetFields();
     });
   };
 
-  const getStatusColor = (status: Bonus['status']) => {
+  const getStatusColor = (status: Bonus["status"]) => {
     switch (status) {
-      case 'approved':
-        return 'success';
-      case 'pending':
-        return 'warning';
-      case 'rejected':
-        return 'error';
+      case "approved":
+        return "success";
+      case "pending":
+        return "warning";
+      case "rejected":
+        return "error";
       default:
-        return 'default';
+        return "default";
     }
   };
 
-  const getStatusIcon = (status: Bonus['status']) => {
+  const getStatusIcon = (status: Bonus["status"]) => {
     switch (status) {
-      case 'approved':
+      case "approved":
         return <CheckCircleOutlined />;
-      case 'pending':
+      case "pending":
         return <ClockCircleOutlined />;
-      case 'rejected':
+      case "rejected":
         return <CloseCircleOutlined />;
       default:
         return null;
     }
   };
 
-  const getActionItems = (record: Bonus): MenuProps['items'] => [
+  const getActionItems = (record: Bonus): MenuProps["items"] => [
     {
-      key: 'view',
-      label: 'View Details',
+      key: "view",
+      label: "View Details",
       icon: <EyeOutlined />,
       onClick: () => handleView(record),
     },
     {
-      key: 'edit',
-      label: 'Edit',
+      key: "edit",
+      label: "Edit",
       icon: <EditOutlined />,
       onClick: () => handleEdit(record),
-      disabled: record.status === 'approved',
+      disabled: record.status === "approved",
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: 'delete',
-      label: 'Delete',
+      key: "delete",
+      label: "Delete",
       icon: <DeleteOutlined />,
       danger: true,
       onClick: () => handleDelete(record),
-      disabled: record.status === 'approved',
+      disabled: record.status === "approved",
     },
   ];
 
   const columns: DynamicTableColumn<Bonus>[] = [
     {
-      title: 'Bonus ID',
-      dataIndex: 'bonusId',
-      key: 'bonusId',
+      title: "Bonus ID",
+      dataIndex: "bonusId",
+      key: "bonusId",
       width: 110,
       render: (id: string) => <Text code>{id}</Text>,
     },
     {
-      title: 'Employee',
-      key: 'employee',
+      title: "Employee",
+      key: "employee",
       width: 200,
       render: (_, record) => (
         <Space>
@@ -309,86 +311,86 @@ export default function BonusesPage() {
       ),
     },
     {
-      title: 'Department',
-      dataIndex: 'department',
-      key: 'department',
+      title: "Department",
+      dataIndex: "department",
+      key: "department",
       width: 130,
       filters: [
-        { text: 'Sales', value: 'Sales' },
-        { text: 'IT', value: 'IT' },
-        { text: 'HR', value: 'HR' },
-        { text: 'Finance', value: 'Finance' },
-        { text: 'Operations', value: 'Operations' },
-        { text: 'Marketing', value: 'Marketing' },
+        { text: "Sales", value: "Sales" },
+        { text: "IT", value: "IT" },
+        { text: "HR", value: "HR" },
+        { text: "Finance", value: "Finance" },
+        { text: "Operations", value: "Operations" },
+        { text: "Marketing", value: "Marketing" },
       ],
       onFilter: (value, record) => record.department === value,
     },
     {
-      title: 'Bonus Type',
-      dataIndex: 'bonusType',
-      key: 'bonusType',
+      title: "Bonus Type",
+      dataIndex: "bonusType",
+      key: "bonusType",
       width: 160,
       render: (type: string) => <Tag color="blue">{type}</Tag>,
       filters: [
-        { text: 'Performance Bonus', value: 'Performance Bonus' },
-        { text: 'Annual Bonus', value: 'Annual Bonus' },
-        { text: 'Spot Bonus', value: 'Spot Bonus' },
-        { text: 'Project Completion', value: 'Project Completion' },
-        { text: 'Campaign Success', value: 'Campaign Success' },
+        { text: "Performance Bonus", value: "Performance Bonus" },
+        { text: "Annual Bonus", value: "Annual Bonus" },
+        { text: "Spot Bonus", value: "Spot Bonus" },
+        { text: "Project Completion", value: "Project Completion" },
+        { text: "Campaign Success", value: "Campaign Success" },
       ],
       onFilter: (value, record) => record.bonusType === value,
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
       width: 120,
-      align: 'right',
+      align: "right",
       render: (amount: number) => (
-        <Text strong style={{ color: '#52c41a' }}>
+        <Text strong style={{ color: "#52c41a" }}>
           ${amount.toLocaleString()}
         </Text>
       ),
       sorter: (a, b) => a.amount - b.amount,
     },
     {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       width: 120,
-      render: (date: string) => dayjs(date).format('MMM DD, YYYY'),
+      render: (date: string) => dayjs(date).format("MMM DD, YYYY"),
       sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
     },
     {
-      title: 'Reason',
-      dataIndex: 'reason',
-      key: 'reason',
+      title: "Reason",
+      dataIndex: "reason",
+      key: "reason",
       width: 250,
       ellipsis: true,
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       width: 120,
-      render: (status: Bonus['status']) => (
+      render: (status: Bonus["status"]) => (
         <Tag icon={getStatusIcon(status)} color={getStatusColor(status)}>
           {status.toUpperCase()}
         </Tag>
       ),
       filters: [
-        { text: 'Approved', value: 'approved' },
-        { text: 'Pending', value: 'pending' },
-        { text: 'Rejected', value: 'rejected' },
+        { text: "Approved", value: "approved" },
+        { text: "Pending", value: "pending" },
+        { text: "Rejected", value: "rejected" },
       ],
       onFilter: (value, record) => record.status === value,
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 100,
-      fixed: 'right',
-      align: 'center',
+      fixed: "right",
+      align: "center",
       render: (_, record) => (
         <Space>
           <Button
@@ -397,7 +399,10 @@ export default function BonusesPage() {
             size="small"
             onClick={() => handleView(record)}
           />
-          <Dropdown menu={{ items: getActionItems(record) }} trigger={['click']}>
+          <Dropdown
+            menu={{ items: getActionItems(record) }}
+            trigger={["click"]}
+          >
             <Button icon={<MoreOutlined />} size="small" />
           </Dropdown>
         </Space>
@@ -407,11 +412,11 @@ export default function BonusesPage() {
 
   // Calculate summary statistics
   const totalBonuses = bonuses.length;
-  const approvedBonuses = bonuses.filter((b) => b.status === 'approved').length;
-  const pendingBonuses = bonuses.filter((b) => b.status === 'pending').length;
+  const approvedBonuses = bonuses.filter((b) => b.status === "approved").length;
+  const pendingBonuses = bonuses.filter((b) => b.status === "pending").length;
   const totalAmount = bonuses.reduce((sum, b) => sum + b.amount, 0);
   const approvedAmount = bonuses
-    .filter((b) => b.status === 'approved')
+    .filter((b) => b.status === "approved")
     .reduce((sum, b) => sum + b.amount, 0);
 
   const bonusForm = (
@@ -419,7 +424,7 @@ export default function BonusesPage() {
       <Form.Item
         name="employeeId"
         label="Employee ID"
-        rules={[{ required: true, message: 'Please enter employee ID' }]}
+        rules={[{ required: true, message: "Please enter employee ID" }]}
       >
         <Input size="large" placeholder="EMP-001" />
       </Form.Item>
@@ -427,7 +432,7 @@ export default function BonusesPage() {
       <Form.Item
         name="employeeName"
         label="Employee Name"
-        rules={[{ required: true, message: 'Please enter employee name' }]}
+        rules={[{ required: true, message: "Please enter employee name" }]}
       >
         <Input size="large" placeholder="John Doe" />
       </Form.Item>
@@ -437,7 +442,7 @@ export default function BonusesPage() {
           <Form.Item
             name="department"
             label="Department"
-            rules={[{ required: true, message: 'Please select department' }]}
+            rules={[{ required: true, message: "Please select department" }]}
           >
             <Select size="large" placeholder="Select department">
               <Option value="Sales">Sales</Option>
@@ -453,7 +458,7 @@ export default function BonusesPage() {
           <Form.Item
             name="bonusType"
             label="Bonus Type"
-            rules={[{ required: true, message: 'Please select bonus type' }]}
+            rules={[{ required: true, message: "Please select bonus type" }]}
           >
             <Select size="large" placeholder="Select bonus type">
               <Option value="Performance Bonus">Performance Bonus</Option>
@@ -473,14 +478,16 @@ export default function BonusesPage() {
           <Form.Item
             name="amount"
             label="Bonus Amount"
-            rules={[{ required: true, message: 'Please enter bonus amount' }]}
+            rules={[{ required: true, message: "Please enter bonus amount" }]}
           >
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
               placeholder="5000"
             />
           </Form.Item>
@@ -489,9 +496,9 @@ export default function BonusesPage() {
           <Form.Item
             name="date"
             label="Date"
-            rules={[{ required: true, message: 'Please select date' }]}
+            rules={[{ required: true, message: "Please select date" }]}
           >
-            <DatePicker size="large" style={{ width: '100%' }} />
+            <DatePicker size="large" style={{ width: "100%" }} />
           </Form.Item>
         </Col>
       </Row>
@@ -499,9 +506,12 @@ export default function BonusesPage() {
       <Form.Item
         name="reason"
         label="Reason"
-        rules={[{ required: true, message: 'Please enter reason for bonus' }]}
+        rules={[{ required: true, message: "Please enter reason for bonus" }]}
       >
-        <TextArea rows={3} placeholder="Describe the reason for this bonus..." />
+        <TextArea
+          rows={3}
+          placeholder="Describe the reason for this bonus..."
+        />
       </Form.Item>
 
       {isEditModalOpen && (
@@ -509,7 +519,7 @@ export default function BonusesPage() {
           <Form.Item
             name="status"
             label="Status"
-            rules={[{ required: true, message: 'Please select status' }]}
+            rules={[{ required: true, message: "Please select status" }]}
           >
             <Select size="large">
               <Option value="approved">Approved</Option>
@@ -540,7 +550,7 @@ export default function BonusesPage() {
               title="Total Bonuses"
               value={totalBonuses}
               prefix={<GiftOutlined />}
-              valueStyle={{ color: '#1677ff' }}
+              valueStyle={{ color: "#1677ff" }}
             />
           </Card>
         </Col>
@@ -550,7 +560,7 @@ export default function BonusesPage() {
               title="Approved"
               value={approvedBonuses}
               prefix={<CheckCircleOutlined />}
-              valueStyle={{ color: '#52c41a' }}
+              valueStyle={{ color: "#52c41a" }}
             />
           </Card>
         </Col>
@@ -560,7 +570,7 @@ export default function BonusesPage() {
               title="Pending"
               value={pendingBonuses}
               prefix={<ClockCircleOutlined />}
-              valueStyle={{ color: '#faad14' }}
+              valueStyle={{ color: "#faad14" }}
             />
           </Card>
         </Col>
@@ -571,7 +581,7 @@ export default function BonusesPage() {
               value={approvedAmount}
               precision={0}
               prefix="$"
-              valueStyle={{ color: '#722ed1' }}
+              valueStyle={{ color: "#722ed1" }}
             />
           </Card>
         </Col>
@@ -602,7 +612,7 @@ export default function BonusesPage() {
               setIsViewModalOpen(false);
               handleEdit(selectedBonus!);
             }}
-            disabled={selectedBonus?.status === 'approved'}
+            disabled={selectedBonus?.status === "approved"}
           >
             Edit Bonus
           </Button>,
@@ -612,7 +622,7 @@ export default function BonusesPage() {
         ]}
       >
         {selectedBonus && (
-          <Space direction="vertical" size="large" style={{ width: '100%' }}>
+          <Space direction="vertical" size="large" style={{ width: "100%" }}>
             <div>
               <Text type="secondary">Bonus ID</Text>
               <div>
@@ -658,7 +668,7 @@ export default function BonusesPage() {
               <Col span={12}>
                 <Text type="secondary">Amount</Text>
                 <div>
-                  <Text strong style={{ fontSize: 20, color: '#52c41a' }}>
+                  <Text strong style={{ fontSize: 20, color: "#52c41a" }}>
                     ${selectedBonus.amount.toLocaleString()}
                   </Text>
                 </div>
@@ -666,7 +676,9 @@ export default function BonusesPage() {
               <Col span={12}>
                 <Text type="secondary">Date</Text>
                 <div>
-                  <Text>{dayjs(selectedBonus.date).format('MMMM DD, YYYY')}</Text>
+                  <Text>
+                    {dayjs(selectedBonus.date).format("MMMM DD, YYYY")}
+                  </Text>
                 </div>
               </Col>
             </Row>

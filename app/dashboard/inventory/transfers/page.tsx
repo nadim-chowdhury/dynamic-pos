@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Button,
@@ -18,7 +18,7 @@ import {
   AutoComplete,
   Row,
   Col,
-} from 'antd';
+} from "antd";
 import {
   EyeOutlined,
   EditOutlined,
@@ -31,10 +31,12 @@ import {
   CloseCircleOutlined,
   CarOutlined,
   InboxOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import DynamicTable, { DynamicTableColumn } from '../../../components/DynamicTable';
-import DynamicModal from '../../../components/DynamicModal';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import DynamicTable, {
+  DynamicTableColumn,
+} from "../../../components/DynamicTable";
+import DynamicModal from "../../../components/DynamicModal";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -49,7 +51,7 @@ interface Transfer {
   quantity: number;
   fromLocation: string;
   toLocation: string;
-  status: 'pending' | 'in-transit' | 'completed' | 'cancelled';
+  status: "pending" | "in-transit" | "completed" | "cancelled";
   notes?: string;
   initiatedBy: string;
   receivedBy?: string;
@@ -60,164 +62,166 @@ interface Transfer {
 // Demo transfers data
 const demoTransfers: Transfer[] = [
   {
-    key: '1',
-    transferNo: 'TRF-2024-001',
-    date: '2024-01-15 10:00 AM',
-    productSku: 'WM-001',
-    productName: 'Wireless Mouse',
+    key: "1",
+    transferNo: "TRF-2024-001",
+    date: "2024-01-15 10:00 AM",
+    productSku: "WM-001",
+    productName: "Wireless Mouse",
     quantity: 15,
-    fromLocation: 'Warehouse A - Shelf 12',
-    toLocation: 'Store - Display Section 3',
-    status: 'completed',
-    notes: 'Transfer for store restocking',
-    initiatedBy: 'John Doe',
-    receivedBy: 'Emily Davis',
-    transferredDate: '2024-01-15 10:30 AM',
-    receivedDate: '2024-01-15 02:15 PM',
+    fromLocation: "Warehouse A - Shelf 12",
+    toLocation: "Store - Display Section 3",
+    status: "completed",
+    notes: "Transfer for store restocking",
+    initiatedBy: "John Doe",
+    receivedBy: "Emily Davis",
+    transferredDate: "2024-01-15 10:30 AM",
+    receivedDate: "2024-01-15 02:15 PM",
   },
   {
-    key: '2',
-    transferNo: 'TRF-2024-002',
-    date: '2024-01-15 09:00 AM',
-    productSku: 'KB-002',
-    productName: 'Mechanical Keyboard',
+    key: "2",
+    transferNo: "TRF-2024-002",
+    date: "2024-01-15 09:00 AM",
+    productSku: "KB-002",
+    productName: "Mechanical Keyboard",
     quantity: 10,
-    fromLocation: 'Warehouse A - Shelf 13',
-    toLocation: 'Warehouse B - Shelf 05',
-    status: 'in-transit',
-    notes: 'Relocating stock for better organization',
-    initiatedBy: 'Sarah Johnson',
-    transferredDate: '2024-01-15 09:30 AM',
+    fromLocation: "Warehouse A - Shelf 13",
+    toLocation: "Warehouse B - Shelf 05",
+    status: "in-transit",
+    notes: "Relocating stock for better organization",
+    initiatedBy: "Sarah Johnson",
+    transferredDate: "2024-01-15 09:30 AM",
   },
   {
-    key: '3',
-    transferNo: 'TRF-2024-003',
-    date: '2024-01-14 03:30 PM',
-    productSku: 'HP-006',
-    productName: 'Noise Cancelling Headphones',
+    key: "3",
+    transferNo: "TRF-2024-003",
+    date: "2024-01-14 03:30 PM",
+    productSku: "HP-006",
+    productName: "Noise Cancelling Headphones",
     quantity: 8,
-    fromLocation: 'Warehouse B - Shelf 08',
-    toLocation: 'Store - Display Section 1',
-    status: 'completed',
-    notes: 'New product launch display',
-    initiatedBy: 'Mike Brown',
-    receivedBy: 'Lisa Anderson',
-    transferredDate: '2024-01-14 04:00 PM',
-    receivedDate: '2024-01-14 05:30 PM',
+    fromLocation: "Warehouse B - Shelf 08",
+    toLocation: "Store - Display Section 1",
+    status: "completed",
+    notes: "New product launch display",
+    initiatedBy: "Mike Brown",
+    receivedBy: "Lisa Anderson",
+    transferredDate: "2024-01-14 04:00 PM",
+    receivedDate: "2024-01-14 05:30 PM",
   },
   {
-    key: '4',
-    transferNo: 'TRF-2024-004',
-    date: '2024-01-14 11:00 AM',
-    productSku: 'DL-008',
-    productName: 'Desk Lamp LED',
+    key: "4",
+    transferNo: "TRF-2024-004",
+    date: "2024-01-14 11:00 AM",
+    productSku: "DL-008",
+    productName: "Desk Lamp LED",
     quantity: 20,
-    fromLocation: 'Warehouse B - Shelf 10',
-    toLocation: 'Warehouse A - Shelf 25',
-    status: 'pending',
-    notes: 'Consolidating inventory',
-    initiatedBy: 'Emily Davis',
+    fromLocation: "Warehouse B - Shelf 10",
+    toLocation: "Warehouse A - Shelf 25",
+    status: "pending",
+    notes: "Consolidating inventory",
+    initiatedBy: "Emily Davis",
   },
   {
-    key: '5',
-    transferNo: 'TRF-2024-005',
-    date: '2024-01-13 02:15 PM',
-    productSku: 'CB-003',
-    productName: 'USB-C Cable',
+    key: "5",
+    transferNo: "TRF-2024-005",
+    date: "2024-01-13 02:15 PM",
+    productSku: "CB-003",
+    productName: "USB-C Cable",
     quantity: 30,
-    fromLocation: 'Warehouse A - Bin 05',
-    toLocation: 'Store - Counter Display',
-    status: 'completed',
-    notes: 'High demand product - restocking',
-    initiatedBy: 'John Doe',
-    receivedBy: 'Robert Taylor',
-    transferredDate: '2024-01-13 02:45 PM',
-    receivedDate: '2024-01-13 04:00 PM',
+    fromLocation: "Warehouse A - Bin 05",
+    toLocation: "Store - Counter Display",
+    status: "completed",
+    notes: "High demand product - restocking",
+    initiatedBy: "John Doe",
+    receivedBy: "Robert Taylor",
+    transferredDate: "2024-01-13 02:45 PM",
+    receivedDate: "2024-01-13 04:00 PM",
   },
   {
-    key: '6',
-    transferNo: 'TRF-2024-006',
-    date: '2024-01-13 09:45 AM',
-    productSku: 'MN-007',
+    key: "6",
+    transferNo: "TRF-2024-006",
+    date: "2024-01-13 09:45 AM",
+    productSku: "MN-007",
     productName: 'Monitor 24"',
     quantity: 5,
-    fromLocation: 'Warehouse A - Shelf 20',
-    toLocation: 'Warehouse B - Shelf 15',
-    status: 'cancelled',
-    notes: 'Cancelled due to stock shortage',
-    initiatedBy: 'Sarah Johnson',
+    fromLocation: "Warehouse A - Shelf 20",
+    toLocation: "Warehouse B - Shelf 15",
+    status: "cancelled",
+    notes: "Cancelled due to stock shortage",
+    initiatedBy: "Sarah Johnson",
   },
   {
-    key: '7',
-    transferNo: 'TRF-2024-007',
-    date: '2024-01-12 01:30 PM',
-    productSku: 'LS-004',
-    productName: 'Laptop Stand',
+    key: "7",
+    transferNo: "TRF-2024-007",
+    date: "2024-01-12 01:30 PM",
+    productSku: "LS-004",
+    productName: "Laptop Stand",
     quantity: 12,
-    fromLocation: 'Warehouse A - Shelf 15',
-    toLocation: 'Store - Display Section 2',
-    status: 'in-transit',
-    notes: 'Promotional display setup',
-    initiatedBy: 'Mike Brown',
-    transferredDate: '2024-01-12 02:00 PM',
+    fromLocation: "Warehouse A - Shelf 15",
+    toLocation: "Store - Display Section 2",
+    status: "in-transit",
+    notes: "Promotional display setup",
+    initiatedBy: "Mike Brown",
+    transferredDate: "2024-01-12 02:00 PM",
   },
 ];
 
 // Demo locations
 const demoLocations = [
-  'Warehouse A - Shelf 12',
-  'Warehouse A - Shelf 13',
-  'Warehouse A - Shelf 14',
-  'Warehouse A - Shelf 15',
-  'Warehouse B - Shelf 05',
-  'Warehouse B - Shelf 08',
-  'Warehouse B - Shelf 10',
-  'Store - Display Section 1',
-  'Store - Display Section 2',
-  'Store - Display Section 3',
-  'Store - Counter Display',
+  "Warehouse A - Shelf 12",
+  "Warehouse A - Shelf 13",
+  "Warehouse A - Shelf 14",
+  "Warehouse A - Shelf 15",
+  "Warehouse B - Shelf 05",
+  "Warehouse B - Shelf 08",
+  "Warehouse B - Shelf 10",
+  "Store - Display Section 1",
+  "Store - Display Section 2",
+  "Store - Display Section 3",
+  "Store - Counter Display",
 ];
 
 // Demo products
 const demoProducts = [
-  { value: 'WM-001', label: 'WM-001 - Wireless Mouse' },
-  { value: 'KB-002', label: 'KB-002 - Mechanical Keyboard' },
-  { value: 'CB-003', label: 'CB-003 - USB-C Cable' },
-  { value: 'HP-006', label: 'HP-006 - Noise Cancelling Headphones' },
-  { value: 'DL-008', label: 'DL-008 - Desk Lamp LED' },
+  { value: "WM-001", label: "WM-001 - Wireless Mouse" },
+  { value: "KB-002", label: "KB-002 - Mechanical Keyboard" },
+  { value: "CB-003", label: "CB-003 - USB-C Cable" },
+  { value: "HP-006", label: "HP-006 - Noise Cancelling Headphones" },
+  { value: "DL-008", label: "DL-008 - Desk Lamp LED" },
 ];
 
 export default function TransfersPage() {
   const [transfers, setTransfers] = useState<Transfer[]>(demoTransfers);
-  const [selectedTransfer, setSelectedTransfer] = useState<Transfer | null>(null);
+  const [selectedTransfer, setSelectedTransfer] = useState<Transfer | null>(
+    null
+  );
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [form] = Form.useForm();
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed':
-        return 'success';
-      case 'in-transit':
-        return 'processing';
-      case 'pending':
-        return 'warning';
-      case 'cancelled':
-        return 'error';
+      case "completed":
+        return "success";
+      case "in-transit":
+        return "processing";
+      case "pending":
+        return "warning";
+      case "cancelled":
+        return "error";
       default:
-        return 'default';
+        return "default";
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed':
+      case "completed":
         return <CheckCircleOutlined />;
-      case 'in-transit':
+      case "in-transit":
         return <CarOutlined />;
-      case 'pending':
+      case "pending":
         return <ClockCircleOutlined />;
-      case 'cancelled':
+      case "cancelled":
         return <CloseCircleOutlined />;
       default:
         return null;
@@ -226,11 +230,11 @@ export default function TransfersPage() {
 
   const getStatusStep = (status: string) => {
     switch (status) {
-      case 'pending':
+      case "pending":
         return 0;
-      case 'in-transit':
+      case "in-transit":
         return 1;
-      case 'completed':
+      case "completed":
         return 2;
       default:
         return 0;
@@ -243,8 +247,8 @@ export default function TransfersPage() {
   };
 
   const handleDelete = (record: Transfer) => {
-    if (record.status === 'completed') {
-      message.error('Cannot delete completed transfers');
+    if (record.status === "completed") {
+      message.error("Cannot delete completed transfers");
       return;
     }
     message.success(`Transfer ${record.transferNo} deleted successfully`);
@@ -252,16 +256,16 @@ export default function TransfersPage() {
   };
 
   const handleComplete = (record: Transfer) => {
-    if (record.status !== 'in-transit') {
-      message.error('Only in-transit transfers can be completed');
+    if (record.status !== "in-transit") {
+      message.error("Only in-transit transfers can be completed");
       return;
     }
     const updated = transfers.map((transfer) =>
       transfer.key === record.key
         ? {
             ...transfer,
-            status: 'completed' as const,
-            receivedBy: 'Current User',
+            status: "completed" as const,
+            receivedBy: "Current User",
             receivedDate: new Date().toLocaleString(),
           }
         : transfer
@@ -271,76 +275,78 @@ export default function TransfersPage() {
   };
 
   const handleCancel = (record: Transfer) => {
-    if (record.status === 'completed') {
-      message.error('Cannot cancel completed transfers');
+    if (record.status === "completed") {
+      message.error("Cannot cancel completed transfers");
       return;
     }
     const updated = transfers.map((transfer) =>
-      transfer.key === record.key ? { ...transfer, status: 'cancelled' as const } : transfer
+      transfer.key === record.key
+        ? { ...transfer, status: "cancelled" as const }
+        : transfer
     );
     setTransfers(updated);
     message.warning(`Transfer ${record.transferNo} cancelled`);
   };
 
-  const getActionItems = (record: Transfer): MenuProps['items'] => [
+  const getActionItems = (record: Transfer): MenuProps["items"] => [
     {
-      key: 'view',
-      label: 'View Details',
+      key: "view",
+      label: "View Details",
       icon: <EyeOutlined />,
       onClick: () => handleView(record),
     },
-    ...(record.status === 'in-transit'
+    ...(record.status === "in-transit"
       ? [
           {
-            key: 'complete',
-            label: 'Mark as Completed',
+            key: "complete",
+            label: "Mark as Completed",
             icon: <CheckCircleOutlined />,
             onClick: () => handleComplete(record),
           },
         ]
       : []),
-    ...(record.status !== 'completed'
+    ...(record.status !== "completed"
       ? [
           {
-            key: 'cancel',
-            label: 'Cancel Transfer',
+            key: "cancel",
+            label: "Cancel Transfer",
             icon: <CloseCircleOutlined />,
             onClick: () => handleCancel(record),
           },
         ]
       : []),
     {
-      type: 'divider' as const,
+      type: "divider" as const,
     },
     {
-      key: 'delete',
-      label: 'Delete',
+      key: "delete",
+      label: "Delete",
       icon: <DeleteOutlined />,
       danger: true,
       onClick: () => handleDelete(record),
-      disabled: record.status === 'completed',
+      disabled: record.status === "completed",
     },
   ];
 
   const columns: DynamicTableColumn<Transfer>[] = [
     {
-      title: 'Transfer No',
-      dataIndex: 'transferNo',
-      key: 'transferNo',
+      title: "Transfer No",
+      dataIndex: "transferNo",
+      key: "transferNo",
       width: 150,
       render: (no: string) => <Text strong>{no}</Text>,
       sorter: (a, b) => a.transferNo.localeCompare(b.transferNo),
     },
     {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       width: 180,
       sorter: (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     },
     {
-      title: 'Product',
-      key: 'product',
+      title: "Product",
+      key: "product",
       width: 220,
       render: (_, record: Transfer) => (
         <div>
@@ -353,24 +359,24 @@ export default function TransfersPage() {
       ),
     },
     {
-      title: 'Quantity',
-      dataIndex: 'quantity',
-      key: 'quantity',
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
       width: 100,
-      align: 'center',
+      align: "center",
       render: (qty: number) => <Text strong>{qty}</Text>,
       sorter: (a, b) => a.quantity - b.quantity,
     },
     {
-      title: 'From → To',
-      key: 'locations',
+      title: "From → To",
+      key: "locations",
       width: 300,
       render: (_, record: Transfer) => (
         <Space direction="vertical" size={0}>
           <Text type="secondary" style={{ fontSize: 12 }}>
             From: {record.fromLocation}
           </Text>
-          <SwapOutlined style={{ color: '#1677ff' }} />
+          <SwapOutlined style={{ color: "#1677ff" }} />
           <Text type="secondary" style={{ fontSize: 12 }}>
             To: {record.toLocation}
           </Text>
@@ -378,9 +384,9 @@ export default function TransfersPage() {
       ),
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       width: 130,
       render: (status: string) => (
         <Tag icon={getStatusIcon(status)} color={getStatusColor(status)}>
@@ -388,29 +394,37 @@ export default function TransfersPage() {
         </Tag>
       ),
       filters: [
-        { text: 'Pending', value: 'pending' },
-        { text: 'In Transit', value: 'in-transit' },
-        { text: 'Completed', value: 'completed' },
-        { text: 'Cancelled', value: 'cancelled' },
+        { text: "Pending", value: "pending" },
+        { text: "In Transit", value: "in-transit" },
+        { text: "Completed", value: "completed" },
+        { text: "Cancelled", value: "cancelled" },
       ],
       onFilter: (value, record) => record.status === value,
     },
     {
-      title: 'Initiated By',
-      dataIndex: 'initiatedBy',
-      key: 'initiatedBy',
+      title: "Initiated By",
+      dataIndex: "initiatedBy",
+      key: "initiatedBy",
       width: 130,
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 120,
-      fixed: 'right',
-      align: 'center',
+      fixed: "right",
+      align: "center",
       render: (_, record: Transfer) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} size="small" onClick={() => handleView(record)} />
-          <Dropdown menu={{ items: getActionItems(record) }} trigger={['click']}>
+          <Button
+            type="primary"
+            icon={<EyeOutlined />}
+            size="small"
+            onClick={() => handleView(record)}
+          />
+          <Dropdown
+            menu={{ items: getActionItems(record) }}
+            trigger={["click"]}
+          >
             <Button icon={<MoreOutlined />} size="small" />
           </Dropdown>
         </Space>
@@ -421,20 +435,20 @@ export default function TransfersPage() {
   const handleCreateTransfer = (values: any) => {
     const newTransfer: Transfer = {
       key: String(Date.now()),
-      transferNo: `TRF-2024-${String(transfers.length + 1).padStart(3, '0')}`,
+      transferNo: `TRF-2024-${String(transfers.length + 1).padStart(3, "0")}`,
       date: new Date().toLocaleString(),
       productSku: values.productSku,
-      productName: values.productName || 'Product Name',
+      productName: values.productName || "Product Name",
       quantity: values.quantity,
       fromLocation: values.fromLocation,
       toLocation: values.toLocation,
-      status: 'pending',
+      status: "pending",
       notes: values.notes,
-      initiatedBy: 'Current User',
+      initiatedBy: "Current User",
     };
 
     setTransfers([newTransfer, ...transfers]);
-    message.success('Transfer request created successfully');
+    message.success("Transfer request created successfully");
     form.resetFields();
     setIsCreateModalOpen(false);
   };
@@ -462,7 +476,7 @@ export default function TransfersPage() {
         title={`Transfer Details - ${selectedTransfer?.transferNo}`}
         width={900}
         footer={[
-          ...(selectedTransfer?.status === 'in-transit'
+          ...(selectedTransfer?.status === "in-transit"
             ? [
                 <Button
                   key="complete"
@@ -488,21 +502,24 @@ export default function TransfersPage() {
             <div style={{ marginBottom: 32 }}>
               <Steps
                 current={getStatusStep(selectedTransfer.status)}
-                status={selectedTransfer.status === 'cancelled' ? 'error' : 'process'}
+                status={
+                  selectedTransfer.status === "cancelled" ? "error" : "process"
+                }
                 items={[
                   {
-                    title: 'Initiated',
+                    title: "Initiated",
                     description: selectedTransfer.date,
                     icon: <InboxOutlined />,
                   },
                   {
-                    title: 'In Transit',
-                    description: selectedTransfer.transferredDate || 'Not started',
+                    title: "In Transit",
+                    description:
+                      selectedTransfer.transferredDate || "Not started",
                     icon: <CarOutlined />,
                   },
                   {
-                    title: 'Received',
-                    description: selectedTransfer.receivedDate || 'Pending',
+                    title: "Received",
+                    description: selectedTransfer.receivedDate || "Pending",
                     icon: <CheckCircleOutlined />,
                   },
                 ]}
@@ -510,13 +527,20 @@ export default function TransfersPage() {
             </div>
 
             <Descriptions bordered column={2}>
-              <Descriptions.Item label="Transfer No">{selectedTransfer.transferNo}</Descriptions.Item>
+              <Descriptions.Item label="Transfer No">
+                {selectedTransfer.transferNo}
+              </Descriptions.Item>
               <Descriptions.Item label="Status">
-                <Tag icon={getStatusIcon(selectedTransfer.status)} color={getStatusColor(selectedTransfer.status)}>
+                <Tag
+                  icon={getStatusIcon(selectedTransfer.status)}
+                  color={getStatusColor(selectedTransfer.status)}
+                >
                   {selectedTransfer.status.toUpperCase()}
                 </Tag>
               </Descriptions.Item>
-              <Descriptions.Item label="Product Name">{selectedTransfer.productName}</Descriptions.Item>
+              <Descriptions.Item label="Product Name">
+                {selectedTransfer.productName}
+              </Descriptions.Item>
               <Descriptions.Item label="SKU">
                 <Text code>{selectedTransfer.productSku}</Text>
               </Descriptions.Item>
@@ -525,25 +549,33 @@ export default function TransfersPage() {
                   {selectedTransfer.quantity} units
                 </Text>
               </Descriptions.Item>
-              <Descriptions.Item label="Date Initiated">{selectedTransfer.date}</Descriptions.Item>
+              <Descriptions.Item label="Date Initiated">
+                {selectedTransfer.date}
+              </Descriptions.Item>
               <Descriptions.Item label="From Location" span={2}>
                 {selectedTransfer.fromLocation}
               </Descriptions.Item>
               <Descriptions.Item label="To Location" span={2}>
                 {selectedTransfer.toLocation}
               </Descriptions.Item>
-              <Descriptions.Item label="Initiated By">{selectedTransfer.initiatedBy}</Descriptions.Item>
+              <Descriptions.Item label="Initiated By">
+                {selectedTransfer.initiatedBy}
+              </Descriptions.Item>
               <Descriptions.Item label="Received By">
-                {selectedTransfer.receivedBy || 'Not received yet'}
+                {selectedTransfer.receivedBy || "Not received yet"}
               </Descriptions.Item>
               {selectedTransfer.transferredDate && (
-                <Descriptions.Item label="Transferred Date">{selectedTransfer.transferredDate}</Descriptions.Item>
+                <Descriptions.Item label="Transferred Date">
+                  {selectedTransfer.transferredDate}
+                </Descriptions.Item>
               )}
               {selectedTransfer.receivedDate && (
-                <Descriptions.Item label="Received Date">{selectedTransfer.receivedDate}</Descriptions.Item>
+                <Descriptions.Item label="Received Date">
+                  {selectedTransfer.receivedDate}
+                </Descriptions.Item>
               )}
               <Descriptions.Item label="Notes" span={2}>
-                {selectedTransfer.notes || 'No notes'}
+                {selectedTransfer.notes || "No notes"}
               </Descriptions.Item>
             </Descriptions>
           </div>
@@ -565,13 +597,15 @@ export default function TransfersPage() {
           <Form.Item
             name="productSku"
             label="Product"
-            rules={[{ required: true, message: 'Please select a product' }]}
+            rules={[{ required: true, message: "Please select a product" }]}
           >
             <AutoComplete
               options={demoProducts}
               placeholder="Search product by SKU or name"
               filterOption={(inputValue, option) =>
-                option!.label.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                option!.label
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
               }
             />
           </Form.Item>
@@ -580,11 +614,19 @@ export default function TransfersPage() {
             name="quantity"
             label="Quantity"
             rules={[
-              { required: true, message: 'Please enter quantity' },
-              { type: 'number', min: 1, message: 'Quantity must be at least 1' },
+              { required: true, message: "Please enter quantity" },
+              {
+                type: "number",
+                min: 1,
+                message: "Quantity must be at least 1",
+              },
             ]}
           >
-            <InputNumber placeholder="Enter quantity" style={{ width: '100%' }} min={1} />
+            <InputNumber
+              placeholder="Enter quantity"
+              style={{ width: "100%" }}
+              min={1}
+            />
           </Form.Item>
 
           <Row gutter={16}>
@@ -592,7 +634,9 @@ export default function TransfersPage() {
               <Form.Item
                 name="fromLocation"
                 label="From Location"
-                rules={[{ required: true, message: 'Please select from location' }]}
+                rules={[
+                  { required: true, message: "Please select from location" },
+                ]}
               >
                 <Select placeholder="Select source location" showSearch>
                   {demoLocations.map((loc) => (
@@ -607,7 +651,9 @@ export default function TransfersPage() {
               <Form.Item
                 name="toLocation"
                 label="To Location"
-                rules={[{ required: true, message: 'Please select to location' }]}
+                rules={[
+                  { required: true, message: "Please select to location" },
+                ]}
               >
                 <Select placeholder="Select destination location" showSearch>
                   {demoLocations.map((loc) => (
@@ -625,8 +671,10 @@ export default function TransfersPage() {
           </Form.Item>
 
           <Form.Item>
-            <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
-              <Button onClick={() => setIsCreateModalOpen(false)}>Cancel</Button>
+            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+              <Button onClick={() => setIsCreateModalOpen(false)}>
+                Cancel
+              </Button>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
                 Create Transfer
               </Button>

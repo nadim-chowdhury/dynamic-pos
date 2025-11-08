@@ -39,7 +39,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        width={250}
+        width={280}
         style={{
           overflow: "auto",
           height: "100vh",
@@ -51,7 +51,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         <div
           style={{
-            height: 64,
+            height: 72,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -69,7 +69,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <Sidebar />
       </Sider>
       <Layout
-        style={{ marginLeft: collapsed ? 80 : 250, transition: "all 0.2s" }}
+        style={{ marginLeft: collapsed ? 80 : 280, transition: "all 0.2s" }}
       >
         <Header
           style={{

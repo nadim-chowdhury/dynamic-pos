@@ -62,8 +62,8 @@ export default function LandingPage() {
         minHeight: "100vh",
         background:
           currentTheme === "dark"
-            ? "linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%)"
-            : "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+            ? "linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%)"
+            : "linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%)",
       }}
     >
       {/* Header */}
@@ -77,8 +77,8 @@ export default function LandingPage() {
           boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
           background:
             currentTheme === "dark"
-              ? "linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%)"
-              : "linear-gradient(135deg, #c3cfe2 0%, #f5f7fa 100%)",
+              ? "linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%)"
+              : "linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%)",
         }}
       >
         <Row justify="space-between" align="middle">

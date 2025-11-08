@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Modal, ModalProps } from 'antd';
+import React from "react";
+import { Modal, ModalProps } from "antd";
 
 export interface DynamicModalProps extends ModalProps {
   isOpen: boolean;

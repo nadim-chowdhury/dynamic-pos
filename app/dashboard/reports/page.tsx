@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Card,
@@ -12,7 +12,7 @@ import {
   Space,
   Button,
   Table,
-} from 'antd';
+} from "antd";
 import {
   DollarOutlined,
   ShoppingCartOutlined,
@@ -22,8 +22,8 @@ import {
   DownloadOutlined,
   PrinterOutlined,
   LineChartOutlined,
-} from '@ant-design/icons';
-import type { ColumnsType } from 'antd/es/table';
+} from "@ant-design/icons";
+import type { ColumnsType } from "antd/es/table";
 
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -39,11 +39,46 @@ interface SalesData {
 }
 
 const demoSalesData: SalesData[] = [
-  { key: '1', date: '2024-01-15', sales: 45, revenue: 12450.50, profit: 3450.20, customers: 32 },
-  { key: '2', date: '2024-01-14', sales: 38, revenue: 9820.75, profit: 2890.15, customers: 28 },
-  { key: '3', date: '2024-01-13', sales: 52, revenue: 15680.00, profit: 4250.50, customers: 41 },
-  { key: '4', date: '2024-01-12', sales: 41, revenue: 11240.25, profit: 3120.80, customers: 35 },
-  { key: '5', date: '2024-01-11', sales: 36, revenue: 8970.50, profit: 2580.30, customers: 29 },
+  {
+    key: "1",
+    date: "2024-01-15",
+    sales: 45,
+    revenue: 12450.5,
+    profit: 3450.2,
+    customers: 32,
+  },
+  {
+    key: "2",
+    date: "2024-01-14",
+    sales: 38,
+    revenue: 9820.75,
+    profit: 2890.15,
+    customers: 28,
+  },
+  {
+    key: "3",
+    date: "2024-01-13",
+    sales: 52,
+    revenue: 15680.0,
+    profit: 4250.5,
+    customers: 41,
+  },
+  {
+    key: "4",
+    date: "2024-01-12",
+    sales: 41,
+    revenue: 11240.25,
+    profit: 3120.8,
+    customers: 35,
+  },
+  {
+    key: "5",
+    date: "2024-01-11",
+    sales: 36,
+    revenue: 8970.5,
+    profit: 2580.3,
+    customers: 29,
+  },
 ];
 
 interface ProductSales {
@@ -55,81 +90,111 @@ interface ProductSales {
 }
 
 const topProducts: ProductSales[] = [
-  { key: '1', product: 'Wireless Mouse', category: 'Electronics', quantity: 145, revenue: 3760.55 },
-  { key: '2', product: 'Mechanical Keyboard', category: 'Electronics', quantity: 89, revenue: 8009.11 },
-  { key: '3', product: 'USB-C Cable', category: 'Accessories', quantity: 234, revenue: 3039.66 },
-  { key: '4', product: 'Laptop Stand', category: 'Accessories', quantity: 67, revenue: 3048.50 },
-  { key: '5', product: 'Headphones', category: 'Audio', quantity: 56, revenue: 6720.00 },
+  {
+    key: "1",
+    product: "Wireless Mouse",
+    category: "Electronics",
+    quantity: 145,
+    revenue: 3760.55,
+  },
+  {
+    key: "2",
+    product: "Mechanical Keyboard",
+    category: "Electronics",
+    quantity: 89,
+    revenue: 8009.11,
+  },
+  {
+    key: "3",
+    product: "USB-C Cable",
+    category: "Accessories",
+    quantity: 234,
+    revenue: 3039.66,
+  },
+  {
+    key: "4",
+    product: "Laptop Stand",
+    category: "Accessories",
+    quantity: 67,
+    revenue: 3048.5,
+  },
+  {
+    key: "5",
+    product: "Headphones",
+    category: "Audio",
+    quantity: 56,
+    revenue: 6720.0,
+  },
 ];
 
 export default function ReportsPage() {
-  const [reportType, setReportType] = useState('sales');
-  const [dateRange, setDateRange] = useState('today');
+  const [reportType, setReportType] = useState("sales");
+  const [dateRange, setDateRange] = useState("today");
 
   const salesColumns: ColumnsType<SalesData> = [
     {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       render: (date: string) => new Date(date).toLocaleDateString(),
     },
     {
-      title: 'Sales Count',
-      dataIndex: 'sales',
-      key: 'sales',
-      align: 'center',
+      title: "Sales Count",
+      dataIndex: "sales",
+      key: "sales",
+      align: "center",
     },
     {
-      title: 'Revenue',
-      dataIndex: 'revenue',
-      key: 'revenue',
-      align: 'right',
+      title: "Revenue",
+      dataIndex: "revenue",
+      key: "revenue",
+      align: "right",
       render: (value: number) => `$${value.toFixed(2)}`,
     },
     {
-      title: 'Profit',
-      dataIndex: 'profit',
-      key: 'profit',
-      align: 'right',
+      title: "Profit",
+      dataIndex: "profit",
+      key: "profit",
+      align: "right",
       render: (value: number) => `$${value.toFixed(2)}`,
     },
     {
-      title: 'Customers',
-      dataIndex: 'customers',
-      key: 'customers',
-      align: 'center',
+      title: "Customers",
+      dataIndex: "customers",
+      key: "customers",
+      align: "center",
     },
   ];
 
   const productColumns: ColumnsType<ProductSales> = [
     {
-      title: 'Rank',
-      key: 'rank',
+      title: "Rank",
+      key: "rank",
       width: 70,
-      align: 'center',
+      align: "center",
       render: (_: any, __: any, index: number) => index + 1,
     },
     {
-      title: 'Product',
-      dataIndex: 'product',
-      key: 'product',
+      title: "Product",
+      dataIndex: "product",
+      key: "product",
     },
     {
-      title: 'Category',
-      dataIndex: 'category',
-      key: 'category',
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
     },
     {
-      title: 'Quantity Sold',
-      dataIndex: 'quantity',
-      key: 'quantity',
-      align: 'center',
+      title: "Quantity Sold",
+      dataIndex: "quantity",
+      key: "quantity",
+      align: "center",
     },
     {
-      title: 'Revenue',
-      dataIndex: 'revenue',
-      key: 'revenue',
-      align: 'right',
+      title: "Revenue",
+      dataIndex: "revenue",
+      key: "revenue",
+      align: "right",
       render: (value: number) => `$${value.toFixed(2)}`,
     },
   ];
@@ -163,9 +228,7 @@ export default function ReportsPage() {
               <Option value="year">This Year</Option>
               <Option value="custom">Custom Range</Option>
             </Select>
-            {dateRange === 'custom' && (
-              <RangePicker />
-            )}
+            {dateRange === "custom" && <RangePicker />}
           </Space>
         </Col>
       </Row>
@@ -176,10 +239,10 @@ export default function ReportsPage() {
           <Card>
             <Statistic
               title="Total Revenue"
-              value={58161.00}
+              value={58161.0}
               precision={2}
               prefix="$"
-              valueStyle={{ color: '#3f8600' }}
+              valueStyle={{ color: "#3f8600" }}
               suffix={
                 <Space>
                   <RiseOutlined />
@@ -195,7 +258,7 @@ export default function ReportsPage() {
               title="Total Sales"
               value={212}
               prefix={<ShoppingCartOutlined />}
-              valueStyle={{ color: '#1677ff' }}
+              valueStyle={{ color: "#1677ff" }}
               suffix={
                 <Space>
                   <RiseOutlined />
@@ -212,7 +275,7 @@ export default function ReportsPage() {
               value={16291.95}
               precision={2}
               prefix="$"
-              valueStyle={{ color: '#722ed1' }}
+              valueStyle={{ color: "#722ed1" }}
               suffix={
                 <Space>
                   <RiseOutlined />
@@ -228,7 +291,7 @@ export default function ReportsPage() {
               title="Unique Customers"
               value={165}
               prefix={<UserOutlined />}
-              valueStyle={{ color: '#fa8c16' }}
+              valueStyle={{ color: "#fa8c16" }}
               suffix={
                 <Space>
                   <FallOutlined />
@@ -244,7 +307,11 @@ export default function ReportsPage() {
       <Row gutter={16}>
         <Col xs={24} lg={16}>
           <Card
-            title={reportType === 'sales' ? 'Sales Performance' : 'Top Selling Products'}
+            title={
+              reportType === "sales"
+                ? "Sales Performance"
+                : "Top Selling Products"
+            }
             extra={
               <Space>
                 <Button icon={<DownloadOutlined />}>Export</Button>
@@ -252,7 +319,7 @@ export default function ReportsPage() {
               </Space>
             }
           >
-            {reportType === 'sales' ? (
+            {reportType === "sales" ? (
               <Table
                 columns={salesColumns}
                 dataSource={demoSalesData}
@@ -305,11 +372,13 @@ export default function ReportsPage() {
 
         <Col xs={24} lg={8}>
           <Card title="Quick Stats" style={{ marginBottom: 16 }}>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space direction="vertical" style={{ width: "100%" }}>
               <div>
                 <Text type="secondary">Average Order Value</Text>
                 <div>
-                  <Text strong style={{ fontSize: 24 }}>$274.34</Text>
+                  <Text strong style={{ fontSize: 24 }}>
+                    $274.34
+                  </Text>
                   <Text type="success" style={{ marginLeft: 8 }}>
                     <RiseOutlined /> 5.2%
                   </Text>
@@ -318,7 +387,9 @@ export default function ReportsPage() {
               <div style={{ marginTop: 16 }}>
                 <Text type="secondary">Conversion Rate</Text>
                 <div>
-                  <Text strong style={{ fontSize: 24 }}>68.5%</Text>
+                  <Text strong style={{ fontSize: 24 }}>
+                    68.5%
+                  </Text>
                   <Text type="success" style={{ marginLeft: 8 }}>
                     <RiseOutlined /> 3.1%
                   </Text>
@@ -327,7 +398,9 @@ export default function ReportsPage() {
               <div style={{ marginTop: 16 }}>
                 <Text type="secondary">Profit Margin</Text>
                 <div>
-                  <Text strong style={{ fontSize: 24 }}>28.0%</Text>
+                  <Text strong style={{ fontSize: 24 }}>
+                    28.0%
+                  </Text>
                   <Text type="success" style={{ marginLeft: 8 }}>
                     <RiseOutlined /> 2.5%
                   </Text>
@@ -337,36 +410,36 @@ export default function ReportsPage() {
           </Card>
 
           <Card title="Report Categories">
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space direction="vertical" style={{ width: "100%" }}>
               <Button
                 block
                 icon={<LineChartOutlined />}
-                onClick={() => setReportType('sales')}
-                type={reportType === 'sales' ? 'primary' : 'default'}
+                onClick={() => setReportType("sales")}
+                type={reportType === "sales" ? "primary" : "default"}
               >
                 Sales Report
               </Button>
               <Button
                 block
                 icon={<ShoppingCartOutlined />}
-                onClick={() => setReportType('products')}
-                type={reportType === 'products' ? 'primary' : 'default'}
+                onClick={() => setReportType("products")}
+                type={reportType === "products" ? "primary" : "default"}
               >
                 Product Report
               </Button>
               <Button
                 block
                 icon={<UserOutlined />}
-                onClick={() => setReportType('customers')}
-                type={reportType === 'customers' ? 'primary' : 'default'}
+                onClick={() => setReportType("customers")}
+                type={reportType === "customers" ? "primary" : "default"}
               >
                 Customer Report
               </Button>
               <Button
                 block
                 icon={<DollarOutlined />}
-                onClick={() => setReportType('inventory')}
-                type={reportType === 'inventory' ? 'primary' : 'default'}
+                onClick={() => setReportType("inventory")}
+                type={reportType === "inventory" ? "primary" : "default"}
               >
                 Inventory Report
               </Button>

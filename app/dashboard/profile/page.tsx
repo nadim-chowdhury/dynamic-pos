@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Card,
@@ -16,7 +16,7 @@ import {
   message,
   Descriptions,
   Tag,
-} from 'antd';
+} from "antd";
 import {
   UserOutlined,
   MailOutlined,
@@ -25,8 +25,8 @@ import {
   EditOutlined,
   SaveOutlined,
   UploadOutlined,
-} from '@ant-design/icons';
-import type { UploadFile } from 'antd';
+} from "@ant-design/icons";
+import type { UploadFile } from "antd";
 
 const { Title, Text } = Typography;
 
@@ -52,18 +52,18 @@ export default function ProfilePage() {
 
   // Demo user data
   const [profile, setProfile] = useState<UserProfile>({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@dynamicpos.com',
-    phone: '+1 (555) 123-4567',
-    address: '123 Business Street',
-    city: 'San Francisco',
-    state: 'California',
-    zipCode: '94105',
-    country: 'United States',
-    role: 'Store Manager',
-    department: 'Sales',
-    joinDate: '2023-01-15',
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@dynamicpos.com",
+    phone: "+1 (555) 123-4567",
+    address: "123 Business Street",
+    city: "San Francisco",
+    state: "California",
+    zipCode: "94105",
+    country: "United States",
+    role: "Store Manager",
+    department: "Sales",
+    joinDate: "2023-01-15",
   });
 
   const handleEdit = () => {
@@ -79,7 +79,7 @@ export default function ProfilePage() {
   const handleSave = (values: any) => {
     setProfile({ ...profile, ...values });
     setIsEditing(false);
-    message.success('Profile updated successfully');
+    message.success("Profile updated successfully");
   };
 
   return (
@@ -90,12 +90,16 @@ export default function ProfilePage() {
         {/* Profile Card */}
         <Col xs={24} lg={8}>
           <Card>
-            <Space direction="vertical" align="center" style={{ width: '100%' }}>
+            <Space
+              direction="vertical"
+              align="center"
+              style={{ width: "100%" }}
+            >
               <Avatar size={120} icon={<UserOutlined />} src={profile.avatar} />
               <Upload maxCount={1} showUploadList={false}>
                 <Button icon={<UploadOutlined />}>Change Photo</Button>
               </Upload>
-              <Title level={4} style={{ margin: '16px 0 0 0' }}>
+              <Title level={4} style={{ margin: "16px 0 0 0" }}>
                 {profile.firstName} {profile.lastName}
               </Title>
               <Text type="secondary">{profile.email}</Text>
@@ -109,13 +113,15 @@ export default function ProfilePage() {
 
             <Descriptions column={1} size="small">
               <Descriptions.Item label="Member Since">
-                {new Date(profile.joinDate).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
+                {new Date(profile.joinDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </Descriptions.Item>
-              <Descriptions.Item label="Department">{profile.department}</Descriptions.Item>
+              <Descriptions.Item label="Department">
+                {profile.department}
+              </Descriptions.Item>
               <Descriptions.Item label="Role">{profile.role}</Descriptions.Item>
             </Descriptions>
           </Card>
@@ -127,7 +133,11 @@ export default function ProfilePage() {
             title="Personal Information"
             extra={
               !isEditing && (
-                <Button type="primary" icon={<EditOutlined />} onClick={handleEdit}>
+                <Button
+                  type="primary"
+                  icon={<EditOutlined />}
+                  onClick={handleEdit}
+                >
                   Edit Profile
                 </Button>
               )
@@ -135,8 +145,12 @@ export default function ProfilePage() {
           >
             {!isEditing ? (
               <Descriptions bordered column={2}>
-                <Descriptions.Item label="First Name">{profile.firstName}</Descriptions.Item>
-                <Descriptions.Item label="Last Name">{profile.lastName}</Descriptions.Item>
+                <Descriptions.Item label="First Name">
+                  {profile.firstName}
+                </Descriptions.Item>
+                <Descriptions.Item label="Last Name">
+                  {profile.lastName}
+                </Descriptions.Item>
                 <Descriptions.Item label="Email" span={2}>
                   <Space>
                     <MailOutlined />
@@ -155,10 +169,18 @@ export default function ProfilePage() {
                     {profile.address}
                   </Space>
                 </Descriptions.Item>
-                <Descriptions.Item label="City">{profile.city}</Descriptions.Item>
-                <Descriptions.Item label="State">{profile.state}</Descriptions.Item>
-                <Descriptions.Item label="ZIP Code">{profile.zipCode}</Descriptions.Item>
-                <Descriptions.Item label="Country">{profile.country}</Descriptions.Item>
+                <Descriptions.Item label="City">
+                  {profile.city}
+                </Descriptions.Item>
+                <Descriptions.Item label="State">
+                  {profile.state}
+                </Descriptions.Item>
+                <Descriptions.Item label="ZIP Code">
+                  {profile.zipCode}
+                </Descriptions.Item>
+                <Descriptions.Item label="Country">
+                  {profile.country}
+                </Descriptions.Item>
               </Descriptions>
             ) : (
               <Form form={form} layout="vertical" onFinish={handleSave}>
@@ -167,7 +189,9 @@ export default function ProfilePage() {
                     <Form.Item
                       name="firstName"
                       label="First Name"
-                      rules={[{ required: true, message: 'Please enter first name' }]}
+                      rules={[
+                        { required: true, message: "Please enter first name" },
+                      ]}
                     >
                       <Input prefix={<UserOutlined />} />
                     </Form.Item>
@@ -176,7 +200,9 @@ export default function ProfilePage() {
                     <Form.Item
                       name="lastName"
                       label="Last Name"
-                      rules={[{ required: true, message: 'Please enter last name' }]}
+                      rules={[
+                        { required: true, message: "Please enter last name" },
+                      ]}
                     >
                       <Input prefix={<UserOutlined />} />
                     </Form.Item>
@@ -187,8 +213,8 @@ export default function ProfilePage() {
                   name="email"
                   label="Email"
                   rules={[
-                    { required: true, message: 'Please enter email' },
-                    { type: 'email', message: 'Please enter valid email' },
+                    { required: true, message: "Please enter email" },
+                    { type: "email", message: "Please enter valid email" },
                   ]}
                 >
                   <Input prefix={<MailOutlined />} />
@@ -197,7 +223,9 @@ export default function ProfilePage() {
                 <Form.Item
                   name="phone"
                   label="Phone"
-                  rules={[{ required: true, message: 'Please enter phone number' }]}
+                  rules={[
+                    { required: true, message: "Please enter phone number" },
+                  ]}
                 >
                   <Input prefix={<PhoneOutlined />} />
                 </Form.Item>
@@ -205,7 +233,7 @@ export default function ProfilePage() {
                 <Form.Item
                   name="address"
                   label="Address"
-                  rules={[{ required: true, message: 'Please enter address' }]}
+                  rules={[{ required: true, message: "Please enter address" }]}
                 >
                   <Input prefix={<EnvironmentOutlined />} />
                 </Form.Item>
@@ -215,7 +243,7 @@ export default function ProfilePage() {
                     <Form.Item
                       name="city"
                       label="City"
-                      rules={[{ required: true, message: 'Please enter city' }]}
+                      rules={[{ required: true, message: "Please enter city" }]}
                     >
                       <Input />
                     </Form.Item>
@@ -224,7 +252,9 @@ export default function ProfilePage() {
                     <Form.Item
                       name="state"
                       label="State"
-                      rules={[{ required: true, message: 'Please enter state' }]}
+                      rules={[
+                        { required: true, message: "Please enter state" },
+                      ]}
                     >
                       <Input />
                     </Form.Item>
@@ -236,7 +266,9 @@ export default function ProfilePage() {
                     <Form.Item
                       name="zipCode"
                       label="ZIP Code"
-                      rules={[{ required: true, message: 'Please enter ZIP code' }]}
+                      rules={[
+                        { required: true, message: "Please enter ZIP code" },
+                      ]}
                     >
                       <Input />
                     </Form.Item>
@@ -245,7 +277,9 @@ export default function ProfilePage() {
                     <Form.Item
                       name="country"
                       label="Country"
-                      rules={[{ required: true, message: 'Please enter country' }]}
+                      rules={[
+                        { required: true, message: "Please enter country" },
+                      ]}
                     >
                       <Input />
                     </Form.Item>
@@ -254,7 +288,11 @@ export default function ProfilePage() {
 
                 <Form.Item>
                   <Space>
-                    <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      icon={<SaveOutlined />}
+                    >
                       Save Changes
                     </Button>
                     <Button onClick={handleCancel}>Cancel</Button>
@@ -266,7 +304,7 @@ export default function ProfilePage() {
 
           {/* Account Security */}
           <Card title="Account Security" style={{ marginTop: 24 }}>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space direction="vertical" style={{ width: "100%" }}>
               <div>
                 <Text strong>Password</Text>
                 <div style={{ marginTop: 8 }}>

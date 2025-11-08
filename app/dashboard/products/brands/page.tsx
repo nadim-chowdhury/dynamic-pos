@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Button,
@@ -13,7 +13,7 @@ import {
   Upload,
   Image,
   Switch,
-} from 'antd';
+} from "antd";
 import {
   EyeOutlined,
   EditOutlined,
@@ -24,10 +24,12 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   TagsOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import DynamicTable, { DynamicTableColumn } from '../../../components/DynamicTable';
-import DynamicModal from '../../../components/DynamicModal';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import DynamicTable, {
+  DynamicTableColumn,
+} from "../../../components/DynamicTable";
+import DynamicModal from "../../../components/DynamicModal";
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
@@ -42,105 +44,105 @@ interface Brand {
   phone?: string;
   logo?: string;
   productCount: number;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 }
 
 // Demo brands data
 const demoBrands: Brand[] = [
   {
-    key: '1',
-    name: 'Logitech',
-    code: 'LOGI',
-    description: 'Computer peripherals and software',
-    website: 'https://www.logitech.com',
-    email: 'contact@logitech.com',
-    phone: '+1-510-795-8500',
+    key: "1",
+    name: "Logitech",
+    code: "LOGI",
+    description: "Computer peripherals and software",
+    website: "https://www.logitech.com",
+    email: "contact@logitech.com",
+    phone: "+1-510-795-8500",
     productCount: 28,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '2',
-    name: 'Corsair',
-    code: 'CORS',
-    description: 'High-performance gaming and enthusiast products',
-    website: 'https://www.corsair.com',
-    email: 'support@corsair.com',
-    phone: '+1-888-222-4346',
+    key: "2",
+    name: "Corsair",
+    code: "CORS",
+    description: "High-performance gaming and enthusiast products",
+    website: "https://www.corsair.com",
+    email: "support@corsair.com",
+    phone: "+1-888-222-4346",
     productCount: 15,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '3',
-    name: 'Anker',
-    code: 'ANKR',
-    description: 'Consumer electronics and charging solutions',
-    website: 'https://www.anker.com',
-    email: 'support@anker.com',
+    key: "3",
+    name: "Anker",
+    code: "ANKR",
+    description: "Consumer electronics and charging solutions",
+    website: "https://www.anker.com",
+    email: "support@anker.com",
     productCount: 22,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '4',
-    name: 'Sony',
-    code: 'SONY',
-    description: 'Consumer and professional electronics',
-    website: 'https://www.sony.com',
-    email: 'info@sony.com',
-    phone: '+1-800-222-7669',
+    key: "4",
+    name: "Sony",
+    code: "SONY",
+    description: "Consumer and professional electronics",
+    website: "https://www.sony.com",
+    email: "info@sony.com",
+    phone: "+1-800-222-7669",
     productCount: 18,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '5',
-    name: 'Dell',
-    code: 'DELL',
-    description: 'Computer technology and services',
-    website: 'https://www.dell.com',
-    email: 'support@dell.com',
-    phone: '+1-800-624-9896',
+    key: "5",
+    name: "Dell",
+    code: "DELL",
+    description: "Computer technology and services",
+    website: "https://www.dell.com",
+    email: "support@dell.com",
+    phone: "+1-800-624-9896",
     productCount: 35,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '6',
-    name: 'Philips',
-    code: 'PHIL',
-    description: 'Health technology and consumer electronics',
-    website: 'https://www.philips.com',
-    email: 'contact@philips.com',
+    key: "6",
+    name: "Philips",
+    code: "PHIL",
+    description: "Health technology and consumer electronics",
+    website: "https://www.philips.com",
+    email: "contact@philips.com",
     productCount: 12,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '7',
-    name: 'Herman Miller',
-    code: 'HM',
-    description: 'Office furniture and ergonomic seating',
-    website: 'https://www.hermanmiller.com',
-    email: 'info@hermanmiller.com',
-    phone: '+1-888-443-4357',
+    key: "7",
+    name: "Herman Miller",
+    code: "HM",
+    description: "Office furniture and ergonomic seating",
+    website: "https://www.hermanmiller.com",
+    email: "info@hermanmiller.com",
+    phone: "+1-888-443-4357",
     productCount: 8,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '8',
-    name: 'SteelSeries',
-    code: 'STLS',
-    description: 'Gaming peripherals and accessories',
-    website: 'https://www.steelseries.com',
-    email: 'support@steelseries.com',
+    key: "8",
+    name: "SteelSeries",
+    code: "STLS",
+    description: "Gaming peripherals and accessories",
+    website: "https://www.steelseries.com",
+    email: "support@steelseries.com",
     productCount: 16,
-    status: 'active',
+    status: "active",
   },
   {
-    key: '9',
-    name: 'Rain Design',
-    code: 'RAIN',
-    description: 'Premium computer accessories',
-    website: 'https://www.raindesigninc.com',
-    email: 'info@raindesigninc.com',
+    key: "9",
+    name: "Rain Design",
+    code: "RAIN",
+    description: "Premium computer accessories",
+    website: "https://www.raindesigninc.com",
+    email: "info@raindesigninc.com",
     productCount: 6,
-    status: 'inactive',
+    status: "inactive",
   },
 ];
 
@@ -153,7 +155,7 @@ export default function BrandsPage() {
   const [form] = Form.useForm();
 
   const getStatusColor = (status: string) => {
-    return status === 'active' ? 'success' : 'default';
+    return status === "active" ? "success" : "default";
   };
 
   const handleView = (record: Brand) => {
@@ -179,7 +181,8 @@ export default function BrandsPage() {
   };
 
   const handleToggleStatus = (record: Brand) => {
-    const newStatus = record.status === 'active' ? 'inactive' : 'active';
+    const newStatus: "active" | "inactive" =
+      record.status === "active" ? "inactive" : "active";
     const updatedBrands = brands.map((brand) =>
       brand.key === record.key ? { ...brand, status: newStatus } : brand
     );
@@ -187,31 +190,36 @@ export default function BrandsPage() {
     message.success(`Brand status updated to ${newStatus}`);
   };
 
-  const getActionItems = (record: Brand): MenuProps['items'] => [
+  const getActionItems = (record: Brand): MenuProps["items"] => [
     {
-      key: 'view',
-      label: 'View Details',
+      key: "view",
+      label: "View Details",
       icon: <EyeOutlined />,
       onClick: () => handleView(record),
     },
     {
-      key: 'edit',
-      label: 'Edit',
+      key: "edit",
+      label: "Edit",
       icon: <EditOutlined />,
       onClick: () => handleEdit(record),
     },
     {
-      key: 'toggle',
-      label: record.status === 'active' ? 'Deactivate' : 'Activate',
-      icon: record.status === 'active' ? <CloseCircleOutlined /> : <CheckCircleOutlined />,
+      key: "toggle",
+      label: record.status === "active" ? "Deactivate" : "Activate",
+      icon:
+        record.status === "active" ? (
+          <CloseCircleOutlined />
+        ) : (
+          <CheckCircleOutlined />
+        ),
       onClick: () => handleToggleStatus(record),
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: 'delete',
-      label: 'Delete',
+      key: "delete",
+      label: "Delete",
       icon: <DeleteOutlined />,
       danger: true,
       onClick: () => handleDelete(record),
@@ -221,26 +229,32 @@ export default function BrandsPage() {
 
   const columns: DynamicTableColumn<Brand>[] = [
     {
-      title: 'Logo',
-      dataIndex: 'logo',
-      key: 'logo',
+      title: "Logo",
+      dataIndex: "logo",
+      key: "logo",
       width: 80,
       render: (logo: string, record: Brand) => (
         <div
           style={{
             width: 50,
             height: 50,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#f0f0f0',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#f0f0f0",
             borderRadius: 4,
-            fontWeight: 'bold',
+            fontWeight: "bold",
             fontSize: 16,
           }}
         >
           {logo ? (
-            <Image src={logo} alt={record.name} width={50} height={50} style={{ objectFit: 'contain' }} />
+            <Image
+              src={logo}
+              alt={record.name}
+              width={50}
+              height={50}
+              style={{ objectFit: "contain" }}
+            />
           ) : (
             <Text>{record.code}</Text>
           )}
@@ -248,23 +262,23 @@ export default function BrandsPage() {
       ),
     },
     {
-      title: 'Code',
-      dataIndex: 'code',
-      key: 'code',
+      title: "Code",
+      dataIndex: "code",
+      key: "code",
       width: 100,
       render: (code: string) => <Text code>{code}</Text>,
     },
     {
-      title: 'Brand Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Brand Name",
+      dataIndex: "name",
+      key: "name",
       width: 180,
       render: (name: string) => <Text strong>{name}</Text>,
       sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
-      title: 'Contact Info',
-      key: 'contact',
+      title: "Contact Info",
+      key: "contact",
       width: 250,
       render: (_, record: Brand) => (
         <Space direction="vertical" size={0}>
@@ -287,53 +301,68 @@ export default function BrandsPage() {
       ),
     },
     {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-      render: (description: string) => description || <Text type="secondary">No description</Text>,
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      render: (description: string) =>
+        description || <Text type="secondary">No description</Text>,
     },
     {
-      title: 'Products',
-      dataIndex: 'productCount',
-      key: 'productCount',
+      title: "Products",
+      dataIndex: "productCount",
+      key: "productCount",
       width: 120,
-      align: 'center',
+      align: "center",
       render: (count: number) => (
-        <Tag color={count > 0 ? 'blue' : 'default'} icon={<TagsOutlined />}>
+        <Tag color={count > 0 ? "blue" : "default"} icon={<TagsOutlined />}>
           {count}
         </Tag>
       ),
       sorter: (a, b) => a.productCount - b.productCount,
     },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       width: 100,
       render: (status: string) => (
         <Tag
-          icon={status === 'active' ? <CheckCircleOutlined /> : <CloseCircleOutlined />}
+          icon={
+            status === "active" ? (
+              <CheckCircleOutlined />
+            ) : (
+              <CloseCircleOutlined />
+            )
+          }
           color={getStatusColor(status)}
         >
           {status.toUpperCase()}
         </Tag>
       ),
       filters: [
-        { text: 'Active', value: 'active' },
-        { text: 'Inactive', value: 'inactive' },
+        { text: "Active", value: "active" },
+        { text: "Inactive", value: "inactive" },
       ],
       onFilter: (value, record) => record.status === value,
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 100,
-      fixed: 'right',
-      align: 'center',
+      fixed: "right",
+      align: "center",
       render: (_, record: Brand) => (
         <Space>
-          <Button type="primary" icon={<EyeOutlined />} size="small" onClick={() => handleView(record)} />
-          <Dropdown menu={{ items: getActionItems(record) }} trigger={['click']}>
+          <Button
+            type="primary"
+            icon={<EyeOutlined />}
+            size="small"
+            onClick={() => handleView(record)}
+          />
+          <Dropdown
+            menu={{ items: getActionItems(record) }}
+            trigger={["click"]}
+          >
             <Button icon={<MoreOutlined />} size="small" />
           </Dropdown>
         </Space>
@@ -346,10 +375,10 @@ export default function BrandsPage() {
       key: String(Date.now()),
       ...values,
       productCount: 0,
-      status: values.status ? 'active' : 'inactive',
+      status: values.status ? "active" : "inactive",
     };
     setBrands([newBrand, ...brands]);
-    message.success('Brand created successfully');
+    message.success("Brand created successfully");
     form.resetFields();
     setIsCreateModalOpen(false);
   };
@@ -357,32 +386,40 @@ export default function BrandsPage() {
   const handleUpdateBrand = (values: any) => {
     const updatedBrands = brands.map((brand) =>
       brand.key === selectedBrand?.key
-        ? { ...brand, ...values, status: values.status ? 'active' : 'inactive' }
+        ? { ...brand, ...values, status: values.status ? "active" : "inactive" }
         : brand
     );
     setBrands(updatedBrands);
-    message.success('Brand updated successfully');
+    message.success("Brand updated successfully");
     form.resetFields();
     setIsEditModalOpen(false);
   };
 
   const BrandForm = ({ onFinish }: { onFinish: (values: any) => void }) => (
-    <Form form={form} layout="vertical" onFinish={onFinish} initialValues={{ status: true }}>
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={onFinish}
+      initialValues={{ status: true }}
+    >
       <Form.Item
         name="code"
         label="Brand Code"
         rules={[
-          { required: true, message: 'Please enter brand code' },
-          { max: 10, message: 'Code must be maximum 10 characters' },
+          { required: true, message: "Please enter brand code" },
+          { max: 10, message: "Code must be maximum 10 characters" },
         ]}
       >
-        <Input placeholder="e.g., LOGI" style={{ textTransform: 'uppercase' }} />
+        <Input
+          placeholder="e.g., LOGI"
+          style={{ textTransform: "uppercase" }}
+        />
       </Form.Item>
 
       <Form.Item
         name="name"
         label="Brand Name"
-        rules={[{ required: true, message: 'Please enter brand name' }]}
+        rules={[{ required: true, message: "Please enter brand name" }]}
       >
         <Input placeholder="Enter brand name" />
       </Form.Item>
@@ -395,7 +432,11 @@ export default function BrandsPage() {
         <Input placeholder="https://www.example.com" />
       </Form.Item>
 
-      <Form.Item name="email" label="Email" rules={[{ type: 'email', message: 'Please enter a valid email' }]}>
+      <Form.Item
+        name="email"
+        label="Email"
+        rules={[{ type: "email", message: "Please enter a valid email" }]}
+      >
         <Input placeholder="contact@brand.com" />
       </Form.Item>
 
@@ -417,7 +458,7 @@ export default function BrandsPage() {
       </Form.Item>
 
       <Form.Item>
-        <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
+        <Space style={{ width: "100%", justifyContent: "flex-end" }}>
           <Button
             onClick={() => {
               setIsCreateModalOpen(false);
@@ -428,7 +469,7 @@ export default function BrandsPage() {
             Cancel
           </Button>
           <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
-            {selectedBrand ? 'Update Brand' : 'Create Brand'}
+            {selectedBrand ? "Update Brand" : "Create Brand"}
           </Button>
         </Space>
       </Form.Item>
@@ -475,7 +516,7 @@ export default function BrandsPage() {
         ]}
       >
         {selectedBrand && (
-          <Space direction="vertical" size="large" style={{ width: '100%' }}>
+          <Space direction="vertical" size="large" style={{ width: "100%" }}>
             <div>
               <Text type="secondary">Brand Code</Text>
               <div>
@@ -504,7 +545,11 @@ export default function BrandsPage() {
               <div>
                 <Text type="secondary">Website</Text>
                 <div>
-                  <a href={selectedBrand.website} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={selectedBrand.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {selectedBrand.website}
                   </a>
                 </div>
@@ -539,7 +584,11 @@ export default function BrandsPage() {
               <div>
                 <Tag
                   icon={
-                    selectedBrand.status === 'active' ? <CheckCircleOutlined /> : <CloseCircleOutlined />
+                    selectedBrand.status === "active" ? (
+                      <CheckCircleOutlined />
+                    ) : (
+                      <CloseCircleOutlined />
+                    )
                   }
                   color={getStatusColor(selectedBrand.status)}
                 >

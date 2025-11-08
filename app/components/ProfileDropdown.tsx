@@ -1,44 +1,44 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Avatar, Dropdown, Space, Typography } from 'antd';
+import React from "react";
+import { Avatar, Dropdown, Space, Typography } from "antd";
 import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
   ProfileOutlined,
   LockOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { useRouter } from 'next/navigation';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { useRouter } from "next/navigation";
 
 const { Text } = Typography;
 
 export default function ProfileDropdown() {
   const router = useRouter();
 
-  const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
+  const handleMenuClick: MenuProps["onClick"] = ({ key }) => {
     switch (key) {
-      case 'profile':
-        router.push('/dashboard/profile');
+      case "profile":
+        router.push("/dashboard/profile");
         break;
-      case 'settings':
-        router.push('/dashboard/settings');
+      case "settings":
+        router.push("/dashboard/settings");
         break;
-      case 'password':
-        router.push('/dashboard/change-password');
+      case "password":
+        router.push("/dashboard/change-password");
         break;
-      case 'logout':
-        router.push('/login');
+      case "logout":
+        router.push("/login");
         break;
     }
   };
 
-  const items: MenuProps['items'] = [
+  const items: MenuProps["items"] = [
     {
-      key: 'user-info',
+      key: "user-info",
       label: (
-        <div style={{ padding: '8px 0' }}>
+        <div style={{ padding: "8px 0" }}>
           <Text strong>John Doe</Text>
           <br />
           <Text type="secondary" style={{ fontSize: 12 }}>
@@ -49,38 +49,45 @@ export default function ProfileDropdown() {
       disabled: true,
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: 'profile',
+      key: "profile",
       icon: <ProfileOutlined />,
-      label: 'My Profile',
+      label: "My Profile",
     },
     {
-      key: 'settings',
+      key: "settings",
       icon: <SettingOutlined />,
-      label: 'Settings',
+      label: "Settings",
     },
     {
-      key: 'password',
+      key: "password",
       icon: <LockOutlined />,
-      label: 'Change Password',
+      label: "Change Password",
     },
     {
-      type: 'divider',
+      type: "divider",
     },
     {
-      key: 'logout',
+      key: "logout",
       icon: <LogoutOutlined />,
-      label: 'Logout',
+      label: "Logout",
       danger: true,
     },
   ];
 
   return (
-    <Dropdown menu={{ items, onClick: handleMenuClick }} trigger={['click']} placement="bottomRight">
-      <Space style={{ cursor: 'pointer' }}>
-        <Avatar icon={<UserOutlined />} style={{ backgroundColor: '#1677ff' }} />
+    <Dropdown
+      menu={{ items, onClick: handleMenuClick }}
+      trigger={["click"]}
+      placement="bottomRight"
+    >
+      <Space style={{ cursor: "pointer" }}>
+        <Avatar
+          icon={<UserOutlined />}
+          style={{ backgroundColor: "#1677ff" }}
+        />
         <Text>John Doe</Text>
       </Space>
     </Dropdown>

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Button,
@@ -18,7 +18,7 @@ import {
   Row,
   Col,
   Card,
-} from 'antd';
+} from "antd";
 import {
   EyeOutlined,
   EditOutlined,
@@ -29,10 +29,12 @@ import {
   CheckCircleOutlined,
   ExclamationCircleOutlined,
   InboxOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import DynamicTable, { DynamicTableColumn } from '../../../components/DynamicTable';
-import DynamicModal from '../../../components/DynamicModal';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import DynamicTable, {
+  DynamicTableColumn,
+} from "../../../components/DynamicTable";
+import DynamicModal from "../../../components/DynamicModal";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -55,130 +57,130 @@ interface StockItem {
 // Demo stock data
 const demoStockData: StockItem[] = [
   {
-    key: '1',
-    sku: 'WM-001',
-    productName: 'Wireless Mouse',
-    category: 'Electronics',
+    key: "1",
+    sku: "WM-001",
+    productName: "Wireless Mouse",
+    category: "Electronics",
     currentStock: 50,
     minStock: 10,
     maxStock: 100,
     reorderPoint: 15,
-    unitCost: 15.00,
-    stockValue: 750.00,
-    location: 'Warehouse A - Shelf 12',
-    lastUpdated: '2024-01-15 10:30 AM',
+    unitCost: 15.0,
+    stockValue: 750.0,
+    location: "Warehouse A - Shelf 12",
+    lastUpdated: "2024-01-15 10:30 AM",
   },
   {
-    key: '2',
-    sku: 'KB-002',
-    productName: 'Mechanical Keyboard',
-    category: 'Electronics',
+    key: "2",
+    sku: "KB-002",
+    productName: "Mechanical Keyboard",
+    category: "Electronics",
     currentStock: 8,
     minStock: 5,
     maxStock: 50,
     reorderPoint: 10,
-    unitCost: 60.00,
-    stockValue: 480.00,
-    location: 'Warehouse A - Shelf 13',
-    lastUpdated: '2024-01-15 09:15 AM',
+    unitCost: 60.0,
+    stockValue: 480.0,
+    location: "Warehouse A - Shelf 13",
+    lastUpdated: "2024-01-15 09:15 AM",
   },
   {
-    key: '3',
-    sku: 'CB-003',
-    productName: 'USB-C Cable',
-    category: 'Accessories',
+    key: "3",
+    sku: "CB-003",
+    productName: "USB-C Cable",
+    category: "Accessories",
     currentStock: 100,
     minStock: 20,
     maxStock: 200,
     reorderPoint: 30,
-    unitCost: 5.00,
-    stockValue: 500.00,
-    location: 'Warehouse B - Bin 05',
-    lastUpdated: '2024-01-14 02:45 PM',
+    unitCost: 5.0,
+    stockValue: 500.0,
+    location: "Warehouse B - Bin 05",
+    lastUpdated: "2024-01-14 02:45 PM",
   },
   {
-    key: '4',
-    sku: 'LS-004',
-    productName: 'Laptop Stand',
-    category: 'Accessories',
+    key: "4",
+    sku: "LS-004",
+    productName: "Laptop Stand",
+    category: "Accessories",
     currentStock: 25,
     minStock: 5,
     maxStock: 40,
     reorderPoint: 8,
-    unitCost: 25.00,
-    stockValue: 625.00,
-    location: 'Warehouse A - Shelf 15',
-    lastUpdated: '2024-01-15 11:20 AM',
+    unitCost: 25.0,
+    stockValue: 625.0,
+    location: "Warehouse A - Shelf 15",
+    lastUpdated: "2024-01-15 11:20 AM",
   },
   {
-    key: '5',
-    sku: 'WC-005',
-    productName: 'Webcam HD',
-    category: 'Electronics',
+    key: "5",
+    sku: "WC-005",
+    productName: "Webcam HD",
+    category: "Electronics",
     currentStock: 3,
     minStock: 5,
     maxStock: 30,
     reorderPoint: 8,
-    unitCost: 40.00,
-    stockValue: 120.00,
-    location: 'Warehouse A - Shelf 14',
-    lastUpdated: '2024-01-15 08:00 AM',
+    unitCost: 40.0,
+    stockValue: 120.0,
+    location: "Warehouse A - Shelf 14",
+    lastUpdated: "2024-01-15 08:00 AM",
   },
   {
-    key: '6',
-    sku: 'HP-006',
-    productName: 'Noise Cancelling Headphones',
-    category: 'Audio',
+    key: "6",
+    sku: "HP-006",
+    productName: "Noise Cancelling Headphones",
+    category: "Audio",
     currentStock: 20,
     minStock: 5,
     maxStock: 35,
     reorderPoint: 8,
-    unitCost: 80.00,
-    stockValue: 1600.00,
-    location: 'Warehouse B - Shelf 08',
-    lastUpdated: '2024-01-14 04:30 PM',
+    unitCost: 80.0,
+    stockValue: 1600.0,
+    location: "Warehouse B - Shelf 08",
+    lastUpdated: "2024-01-14 04:30 PM",
   },
   {
-    key: '7',
-    sku: 'MN-007',
+    key: "7",
+    sku: "MN-007",
     productName: 'Monitor 24"',
-    category: 'Electronics',
+    category: "Electronics",
     currentStock: 0,
     minStock: 3,
     maxStock: 20,
     reorderPoint: 5,
-    unitCost: 200.00,
-    stockValue: 0.00,
-    location: 'Warehouse A - Shelf 20',
-    lastUpdated: '2024-01-13 03:15 PM',
+    unitCost: 200.0,
+    stockValue: 0.0,
+    location: "Warehouse A - Shelf 20",
+    lastUpdated: "2024-01-13 03:15 PM",
   },
   {
-    key: '8',
-    sku: 'DL-008',
-    productName: 'Desk Lamp LED',
-    category: 'Office',
+    key: "8",
+    sku: "DL-008",
+    productName: "Desk Lamp LED",
+    category: "Office",
     currentStock: 40,
     minStock: 10,
     maxStock: 60,
     reorderPoint: 15,
-    unitCost: 20.00,
-    stockValue: 800.00,
-    location: 'Warehouse B - Shelf 10',
-    lastUpdated: '2024-01-15 01:00 PM',
+    unitCost: 20.0,
+    stockValue: 800.0,
+    location: "Warehouse B - Shelf 10",
+    lastUpdated: "2024-01-15 01:00 PM",
   },
   {
-    key: '9',
-    sku: 'MB-010',
-    productName: 'Mouse Pad',
-    category: 'Accessories',
+    key: "9",
+    sku: "MB-010",
+    productName: "Mouse Pad",
+    category: "Accessories",
     currentStock: 2,
     minStock: 15,
     maxStock: 80,
     reorderPoint: 20,
-    unitCost: 8.00,
-    stockValue: 16.00,
-    location: 'Warehouse B - Bin 03',
-    lastUpdated: '2024-01-12 10:45 AM',
+    unitCost: 8.0,
+    stockValue: 16.0,
+    location: "Warehouse B - Bin 03",
+    lastUpdated: "2024-01-12 10:45 AM",
   },
 ];
 
@@ -186,18 +188,42 @@ export default function StockManagementPage() {
   const [stockData, setStockData] = useState<StockItem[]>(demoStockData);
   const [selectedItem, setSelectedItem] = useState<StockItem | null>(null);
   const [isAdjustModalOpen, setIsAdjustModalOpen] = useState(false);
-  const [adjustmentType, setAdjustmentType] = useState<'add' | 'remove'>('add');
+  const [adjustmentType, setAdjustmentType] = useState<"add" | "remove">("add");
   const [form] = Form.useForm();
 
-  const getStockStatus = (currentStock: number, minStock: number, reorderPoint: number) => {
+  const getStockStatus = (
+    currentStock: number,
+    minStock: number,
+    reorderPoint: number
+  ) => {
     if (currentStock === 0) {
-      return { status: 'outofstock', color: 'error', text: 'Out of Stock', icon: <InboxOutlined /> };
+      return {
+        status: "outofstock",
+        color: "error",
+        text: "Out of Stock",
+        icon: <InboxOutlined />,
+      };
     } else if (currentStock <= minStock) {
-      return { status: 'critical', color: 'error', text: 'Critical', icon: <ExclamationCircleOutlined /> };
+      return {
+        status: "critical",
+        color: "error",
+        text: "Critical",
+        icon: <ExclamationCircleOutlined />,
+      };
     } else if (currentStock <= reorderPoint) {
-      return { status: 'low', color: 'warning', text: 'Low Stock', icon: <WarningOutlined /> };
+      return {
+        status: "low",
+        color: "warning",
+        text: "Low Stock",
+        icon: <WarningOutlined />,
+      };
     }
-    return { status: 'normal', color: 'success', text: 'Normal', icon: <CheckCircleOutlined /> };
+    return {
+      status: "normal",
+      color: "success",
+      text: "Normal",
+      icon: <CheckCircleOutlined />,
+    };
   };
 
   const getStockPercentage = (current: number, max: number) => {
@@ -206,14 +232,14 @@ export default function StockManagementPage() {
 
   const handleAddStock = (record: StockItem) => {
     setSelectedItem(record);
-    setAdjustmentType('add');
+    setAdjustmentType("add");
     form.resetFields();
     setIsAdjustModalOpen(true);
   };
 
   const handleRemoveStock = (record: StockItem) => {
     setSelectedItem(record);
-    setAdjustmentType('remove');
+    setAdjustmentType("remove");
     form.resetFields();
     setIsAdjustModalOpen(true);
   };
@@ -223,7 +249,7 @@ export default function StockManagementPage() {
     const updatedStock = stockData.map((item) => {
       if (item.key === selectedItem?.key) {
         const newStock =
-          adjustmentType === 'add'
+          adjustmentType === "add"
             ? item.currentStock + quantity
             : Math.max(0, item.currentStock - quantity);
         return {
@@ -238,22 +264,24 @@ export default function StockManagementPage() {
 
     setStockData(updatedStock);
     message.success(
-      `Stock ${adjustmentType === 'add' ? 'added' : 'removed'} successfully: ${quantity} units`
+      `Stock ${
+        adjustmentType === "add" ? "added" : "removed"
+      } successfully: ${quantity} units`
     );
     setIsAdjustModalOpen(false);
     form.resetFields();
   };
 
-  const getActionItems = (record: StockItem): MenuProps['items'] => [
+  const getActionItems = (record: StockItem): MenuProps["items"] => [
     {
-      key: 'add',
-      label: 'Add Stock',
+      key: "add",
+      label: "Add Stock",
       icon: <PlusOutlined />,
       onClick: () => handleAddStock(record),
     },
     {
-      key: 'remove',
-      label: 'Remove Stock',
+      key: "remove",
+      label: "Remove Stock",
       icon: <MinusOutlined />,
       onClick: () => handleRemoveStock(record),
       disabled: record.currentStock === 0,
@@ -262,47 +290,47 @@ export default function StockManagementPage() {
 
   const columns: DynamicTableColumn<StockItem>[] = [
     {
-      title: 'SKU',
-      dataIndex: 'sku',
-      key: 'sku',
+      title: "SKU",
+      dataIndex: "sku",
+      key: "sku",
       width: 120,
       render: (sku: string) => <Text code>{sku}</Text>,
     },
     {
-      title: 'Product Name',
-      dataIndex: 'productName',
-      key: 'productName',
+      title: "Product Name",
+      dataIndex: "productName",
+      key: "productName",
       width: 200,
       render: (name: string) => <Text strong>{name}</Text>,
     },
     {
-      title: 'Category',
-      dataIndex: 'category',
-      key: 'category',
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
       width: 130,
       filters: [
-        { text: 'Electronics', value: 'Electronics' },
-        { text: 'Accessories', value: 'Accessories' },
-        { text: 'Audio', value: 'Audio' },
-        { text: 'Office', value: 'Office' },
+        { text: "Electronics", value: "Electronics" },
+        { text: "Accessories", value: "Accessories" },
+        { text: "Audio", value: "Audio" },
+        { text: "Office", value: "Office" },
       ],
       onFilter: (value, record) => record.category === value,
     },
     {
-      title: 'Current Stock',
-      dataIndex: 'currentStock',
-      key: 'currentStock',
+      title: "Current Stock",
+      dataIndex: "currentStock",
+      key: "currentStock",
       width: 150,
-      align: 'center',
+      align: "center",
       render: (stock: number, record: StockItem) => (
-        <Space direction="vertical" size={4} style={{ width: '100%' }}>
+        <Space direction="vertical" size={4} style={{ width: "100%" }}>
           <Text strong style={{ fontSize: 18 }}>
             {stock}
           </Text>
           <Progress
             percent={getStockPercentage(stock, record.maxStock)}
             size="small"
-            status={stock <= record.minStock ? 'exception' : 'normal'}
+            status={stock <= record.minStock ? "exception" : "normal"}
             showInfo={false}
           />
         </Space>
@@ -310,10 +338,10 @@ export default function StockManagementPage() {
       sorter: (a, b) => a.currentStock - b.currentStock,
     },
     {
-      title: 'Min / Max',
-      key: 'minMax',
+      title: "Min / Max",
+      key: "minMax",
       width: 100,
-      align: 'center',
+      align: "center",
       render: (_, record: StockItem) => (
         <Space direction="vertical" size={0}>
           <Text type="secondary" style={{ fontSize: 12 }}>
@@ -326,11 +354,15 @@ export default function StockManagementPage() {
       ),
     },
     {
-      title: 'Status',
-      key: 'status',
+      title: "Status",
+      key: "status",
       width: 130,
       render: (_, record: StockItem) => {
-        const status = getStockStatus(record.currentStock, record.minStock, record.reorderPoint);
+        const status = getStockStatus(
+          record.currentStock,
+          record.minStock,
+          record.reorderPoint
+        );
         return (
           <Tag icon={status.icon} color={status.color}>
             {status.text}
@@ -338,38 +370,42 @@ export default function StockManagementPage() {
         );
       },
       filters: [
-        { text: 'Out of Stock', value: 'outofstock' },
-        { text: 'Critical', value: 'critical' },
-        { text: 'Low Stock', value: 'low' },
-        { text: 'Normal', value: 'normal' },
+        { text: "Out of Stock", value: "outofstock" },
+        { text: "Critical", value: "critical" },
+        { text: "Low Stock", value: "low" },
+        { text: "Normal", value: "normal" },
       ],
       onFilter: (value, record) => {
-        const status = getStockStatus(record.currentStock, record.minStock, record.reorderPoint);
+        const status = getStockStatus(
+          record.currentStock,
+          record.minStock,
+          record.reorderPoint
+        );
         return status.status === value;
       },
     },
     {
-      title: 'Stock Value',
-      dataIndex: 'stockValue',
-      key: 'stockValue',
+      title: "Stock Value",
+      dataIndex: "stockValue",
+      key: "stockValue",
       width: 130,
-      align: 'right',
+      align: "right",
       render: (value: number) => <Text strong>${value.toFixed(2)}</Text>,
       sorter: (a, b) => a.stockValue - b.stockValue,
     },
     {
-      title: 'Location',
-      dataIndex: 'location',
-      key: 'location',
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
       width: 180,
       render: (location: string) => <Text type="secondary">{location}</Text>,
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 120,
-      fixed: 'right',
-      align: 'center',
+      fixed: "right",
+      align: "center",
       render: (_, record: StockItem) => (
         <Space>
           <Button
@@ -380,7 +416,10 @@ export default function StockManagementPage() {
           >
             Add
           </Button>
-          <Dropdown menu={{ items: getActionItems(record) }} trigger={['click']}>
+          <Dropdown
+            menu={{ items: getActionItems(record) }}
+            trigger={["click"]}
+          >
             <Button icon={<MoreOutlined />} size="small" />
           </Dropdown>
         </Space>
@@ -390,11 +429,16 @@ export default function StockManagementPage() {
 
   // Calculate summary statistics
   const totalItems = stockData.length;
-  const outOfStockItems = stockData.filter((item) => item.currentStock === 0).length;
+  const outOfStockItems = stockData.filter(
+    (item) => item.currentStock === 0
+  ).length;
   const lowStockItems = stockData.filter(
     (item) => item.currentStock > 0 && item.currentStock <= item.reorderPoint
   ).length;
-  const totalStockValue = stockData.reduce((sum, item) => sum + item.stockValue, 0);
+  const totalStockValue = stockData.reduce(
+    (sum, item) => sum + item.stockValue,
+    0
+  );
 
   return (
     <div>
@@ -408,7 +452,7 @@ export default function StockManagementPage() {
               title="Total Items"
               value={totalItems}
               prefix={<InboxOutlined />}
-              valueStyle={{ color: '#1677ff' }}
+              valueStyle={{ color: "#1677ff" }}
             />
           </Card>
         </Col>
@@ -419,7 +463,7 @@ export default function StockManagementPage() {
               value={totalStockValue}
               precision={2}
               prefix="$"
-              valueStyle={{ color: '#52c41a' }}
+              valueStyle={{ color: "#52c41a" }}
             />
           </Card>
         </Col>
@@ -429,7 +473,7 @@ export default function StockManagementPage() {
               title="Out of Stock"
               value={outOfStockItems}
               prefix={<ExclamationCircleOutlined />}
-              valueStyle={{ color: '#ff4d4f' }}
+              valueStyle={{ color: "#ff4d4f" }}
             />
           </Card>
         </Col>
@@ -439,7 +483,7 @@ export default function StockManagementPage() {
               title="Low Stock"
               value={lowStockItems}
               prefix={<WarningOutlined />}
-              valueStyle={{ color: '#faad14' }}
+              valueStyle={{ color: "#faad14" }}
             />
           </Card>
         </Col>
@@ -447,7 +491,7 @@ export default function StockManagementPage() {
 
       {/* Alerts */}
       {(outOfStockItems > 0 || lowStockItems > 0) && (
-        <Space direction="vertical" style={{ width: '100%', marginBottom: 16 }}>
+        <Space direction="vertical" style={{ width: "100%", marginBottom: 16 }}>
           {outOfStockItems > 0 && (
             <Alert
               message={`${outOfStockItems} product(s) are out of stock`}
@@ -484,12 +528,14 @@ export default function StockManagementPage() {
           setIsAdjustModalOpen(false);
           form.resetFields();
         }}
-        title={`${adjustmentType === 'add' ? 'Add' : 'Remove'} Stock - ${selectedItem?.productName}`}
+        title={`${adjustmentType === "add" ? "Add" : "Remove"} Stock - ${
+          selectedItem?.productName
+        }`}
         width={600}
         footer={null}
       >
         <div style={{ marginBottom: 16 }}>
-          <Space direction="vertical" style={{ width: '100%' }}>
+          <Space direction="vertical" style={{ width: "100%" }}>
             <div>
               <Text type="secondary">Current Stock:</Text>
               <Text strong style={{ marginLeft: 8, fontSize: 18 }}>
@@ -510,25 +556,33 @@ export default function StockManagementPage() {
             name="quantity"
             label="Quantity"
             rules={[
-              { required: true, message: 'Please enter quantity' },
-              { type: 'number', min: 1, message: 'Quantity must be at least 1' },
+              { required: true, message: "Please enter quantity" },
+              {
+                type: "number",
+                min: 1,
+                message: "Quantity must be at least 1",
+              },
             ]}
           >
             <InputNumber
               placeholder="Enter quantity"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={1}
-              max={adjustmentType === 'remove' ? selectedItem?.currentStock : undefined}
+              max={
+                adjustmentType === "remove"
+                  ? selectedItem?.currentStock
+                  : undefined
+              }
             />
           </Form.Item>
 
           <Form.Item
             name="reason"
             label="Reason"
-            rules={[{ required: true, message: 'Please select a reason' }]}
+            rules={[{ required: true, message: "Please select a reason" }]}
           >
             <Select placeholder="Select reason">
-              {adjustmentType === 'add' ? (
+              {adjustmentType === "add" ? (
                 <>
                   <Option value="purchase">New Purchase</Option>
                   <Option value="return">Customer Return</Option>
@@ -552,14 +606,22 @@ export default function StockManagementPage() {
           </Form.Item>
 
           <Form.Item>
-            <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
-              <Button onClick={() => setIsAdjustModalOpen(false)}>Cancel</Button>
+            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+              <Button onClick={() => setIsAdjustModalOpen(false)}>
+                Cancel
+              </Button>
               <Button
                 type="primary"
                 htmlType="submit"
-                icon={adjustmentType === 'add' ? <PlusOutlined /> : <MinusOutlined />}
+                icon={
+                  adjustmentType === "add" ? (
+                    <PlusOutlined />
+                  ) : (
+                    <MinusOutlined />
+                  )
+                }
               >
-                {adjustmentType === 'add' ? 'Add Stock' : 'Remove Stock'}
+                {adjustmentType === "add" ? "Add Stock" : "Remove Stock"}
               </Button>
             </Space>
           </Form.Item>

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Card,
@@ -16,15 +16,15 @@ import {
   Row,
   Col,
   Divider,
-} from 'antd';
+} from "antd";
 import {
   SaveOutlined,
   CloseOutlined,
   UploadOutlined,
   UserAddOutlined,
-} from '@ant-design/icons';
-import { useRouter } from 'next/navigation';
-import type { UploadFile } from 'antd/es/upload/interface';
+} from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import type { UploadFile } from "antd/es/upload/interface";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -41,20 +41,20 @@ export default function AddEmployeePage() {
 
     // Simulate API call
     setTimeout(() => {
-      console.log('Employee Data:', {
+      console.log("Employee Data:", {
         ...values,
         avatar: fileList.length > 0 ? fileList[0] : null,
-        joinDate: values.joinDate?.format('YYYY-MM-DD'),
+        joinDate: values.joinDate?.format("YYYY-MM-DD"),
       });
 
-      message.success('Employee added successfully!');
+      message.success("Employee added successfully!");
       setLoading(false);
-      router.push('/dashboard/hrm/employees-list');
+      router.push("/dashboard/hrm/employees-list");
     }, 1000);
   };
 
   const handleCancel = () => {
-    router.push('/dashboard/hrm/employees-list');
+    router.push("/dashboard/hrm/employees-list");
   };
 
   const handleUploadChange = ({ fileList: newFileList }: any) => {
@@ -73,7 +73,7 @@ export default function AddEmployeePage() {
           layout="vertical"
           onFinish={handleSubmit}
           initialValues={{
-            status: 'active',
+            status: "active",
           }}
         >
           {/* Personal Information */}
@@ -85,7 +85,9 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="employeeId"
                 label="Employee ID"
-                rules={[{ required: true, message: 'Please enter employee ID' }]}
+                rules={[
+                  { required: true, message: "Please enter employee ID" },
+                ]}
               >
                 <Input size="large" placeholder="EMP-001" />
               </Form.Item>
@@ -94,7 +96,7 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="firstName"
                 label="First Name"
-                rules={[{ required: true, message: 'Please enter first name' }]}
+                rules={[{ required: true, message: "Please enter first name" }]}
               >
                 <Input size="large" placeholder="John" />
               </Form.Item>
@@ -103,7 +105,7 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="lastName"
                 label="Last Name"
-                rules={[{ required: true, message: 'Please enter last name' }]}
+                rules={[{ required: true, message: "Please enter last name" }]}
               >
                 <Input size="large" placeholder="Doe" />
               </Form.Item>
@@ -116,8 +118,8 @@ export default function AddEmployeePage() {
                 name="email"
                 label="Email Address"
                 rules={[
-                  { required: true, message: 'Please enter email' },
-                  { type: 'email', message: 'Please enter valid email' },
+                  { required: true, message: "Please enter email" },
+                  { type: "email", message: "Please enter valid email" },
                 ]}
               >
                 <Input size="large" placeholder="john.doe@company.com" />
@@ -127,7 +129,9 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="phone"
                 label="Phone Number"
-                rules={[{ required: true, message: 'Please enter phone number' }]}
+                rules={[
+                  { required: true, message: "Please enter phone number" },
+                ]}
               >
                 <Input size="large" placeholder="+1 (555) 123-4567" />
               </Form.Item>
@@ -137,7 +141,10 @@ export default function AddEmployeePage() {
           <Row gutter={16}>
             <Col xs={24} md={12}>
               <Form.Item name="address" label="Address">
-                <TextArea rows={3} placeholder="123 Main St, San Francisco, CA" />
+                <TextArea
+                  rows={3}
+                  placeholder="123 Main St, San Francisco, CA"
+                />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -176,7 +183,9 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="department"
                 label="Department"
-                rules={[{ required: true, message: 'Please select department' }]}
+                rules={[
+                  { required: true, message: "Please select department" },
+                ]}
               >
                 <Select size="large" placeholder="Select department">
                   <Option value="Sales">Sales</Option>
@@ -192,17 +201,23 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="designation"
                 label="Designation"
-                rules={[{ required: true, message: 'Please select designation' }]}
+                rules={[
+                  { required: true, message: "Please select designation" },
+                ]}
               >
                 <Select size="large" placeholder="Select designation">
                   <Option value="Store Manager">Store Manager</Option>
                   <Option value="Sales Associate">Sales Associate</Option>
                   <Option value="Cashier">Cashier</Option>
-                  <Option value="System Administrator">System Administrator</Option>
+                  <Option value="System Administrator">
+                    System Administrator
+                  </Option>
                   <Option value="HR Manager">HR Manager</Option>
                   <Option value="Accountant">Accountant</Option>
                   <Option value="Warehouse Manager">Warehouse Manager</Option>
-                  <Option value="Marketing Coordinator">Marketing Coordinator</Option>
+                  <Option value="Marketing Coordinator">
+                    Marketing Coordinator
+                  </Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -210,9 +225,9 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="joinDate"
                 label="Join Date"
-                rules={[{ required: true, message: 'Please select join date' }]}
+                rules={[{ required: true, message: "Please select join date" }]}
               >
-                <DatePicker size="large" style={{ width: '100%' }} />
+                <DatePicker size="large" style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>
@@ -222,14 +237,16 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="salary"
                 label="Annual Salary"
-                rules={[{ required: true, message: 'Please enter salary' }]}
+                rules={[{ required: true, message: "Please enter salary" }]}
               >
                 <InputNumber
                   size="large"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                   min={0}
-                  formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                  parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+                  formatter={(value) =>
+                    `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  }
+                  parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
                   placeholder="65000"
                 />
               </Form.Item>
@@ -238,7 +255,7 @@ export default function AddEmployeePage() {
               <Form.Item
                 name="status"
                 label="Status"
-                rules={[{ required: true, message: 'Please select status' }]}
+                rules={[{ required: true, message: "Please select status" }]}
               >
                 <Select size="large">
                   <Option value="active">Active</Option>
@@ -282,7 +299,10 @@ export default function AddEmployeePage() {
           </Row>
 
           <Form.Item name="notes" label="Notes">
-            <TextArea rows={4} placeholder="Any additional notes or comments..." />
+            <TextArea
+              rows={4}
+              placeholder="Any additional notes or comments..."
+            />
           </Form.Item>
 
           <Divider />

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Button,
@@ -16,7 +16,7 @@ import {
   Card,
   Statistic,
   Descriptions,
-} from 'antd';
+} from "antd";
 import {
   EyeOutlined,
   EditOutlined,
@@ -26,10 +26,12 @@ import {
   RiseOutlined,
   FallOutlined,
   TeamOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import DynamicTable, { DynamicTableColumn } from '../../../components/DynamicTable';
-import DynamicModal from '../../../components/DynamicModal';
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import DynamicTable, {
+  DynamicTableColumn,
+} from "../../../components/DynamicTable";
+import DynamicModal from "../../../components/DynamicModal";
 
 const { Title, Text } = Typography;
 
@@ -54,11 +56,11 @@ interface SalaryRecord {
 // Demo salary data
 const demoSalaryRecords: SalaryRecord[] = [
   {
-    key: '1',
-    employeeId: 'EMP-001',
-    employeeName: 'John Doe',
-    department: 'Sales',
-    designation: 'Store Manager',
+    key: "1",
+    employeeId: "EMP-001",
+    employeeName: "John Doe",
+    department: "Sales",
+    designation: "Store Manager",
     basicSalary: 65000,
     houseAllowance: 8000,
     transportAllowance: 3000,
@@ -70,11 +72,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 67500,
   },
   {
-    key: '2',
-    employeeId: 'EMP-002',
-    employeeName: 'Sarah Johnson',
-    department: 'Sales',
-    designation: 'Sales Associate',
+    key: "2",
+    employeeId: "EMP-002",
+    employeeName: "Sarah Johnson",
+    department: "Sales",
+    designation: "Sales Associate",
     basicSalary: 45000,
     houseAllowance: 5000,
     transportAllowance: 2000,
@@ -86,11 +88,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 46500,
   },
   {
-    key: '3',
-    employeeId: 'EMP-003',
-    employeeName: 'Mike Brown',
-    department: 'IT',
-    designation: 'System Administrator',
+    key: "3",
+    employeeId: "EMP-003",
+    employeeName: "Mike Brown",
+    department: "IT",
+    designation: "System Administrator",
     basicSalary: 75000,
     houseAllowance: 10000,
     transportAllowance: 4000,
@@ -102,11 +104,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 78500,
   },
   {
-    key: '4',
-    employeeId: 'EMP-004',
-    employeeName: 'Emily Davis',
-    department: 'HR',
-    designation: 'HR Manager',
+    key: "4",
+    employeeId: "EMP-004",
+    employeeName: "Emily Davis",
+    department: "HR",
+    designation: "HR Manager",
     basicSalary: 70000,
     houseAllowance: 9000,
     transportAllowance: 3500,
@@ -118,11 +120,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 73000,
   },
   {
-    key: '5',
-    employeeId: 'EMP-005',
-    employeeName: 'Robert Taylor',
-    department: 'Finance',
-    designation: 'Accountant',
+    key: "5",
+    employeeId: "EMP-005",
+    employeeName: "Robert Taylor",
+    department: "Finance",
+    designation: "Accountant",
     basicSalary: 60000,
     houseAllowance: 7000,
     transportAllowance: 2500,
@@ -134,11 +136,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 61950,
   },
   {
-    key: '6',
-    employeeId: 'EMP-006',
-    employeeName: 'Lisa Anderson',
-    department: 'Sales',
-    designation: 'Cashier',
+    key: "6",
+    employeeId: "EMP-006",
+    employeeName: "Lisa Anderson",
+    department: "Sales",
+    designation: "Cashier",
     basicSalary: 35000,
     houseAllowance: 4000,
     transportAllowance: 1500,
@@ -150,11 +152,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 36400,
   },
   {
-    key: '7',
-    employeeId: 'EMP-007',
-    employeeName: 'David Wilson',
-    department: 'Operations',
-    designation: 'Warehouse Manager',
+    key: "7",
+    employeeId: "EMP-007",
+    employeeName: "David Wilson",
+    department: "Operations",
+    designation: "Warehouse Manager",
     basicSalary: 55000,
     houseAllowance: 6500,
     transportAllowance: 2500,
@@ -166,11 +168,11 @@ const demoSalaryRecords: SalaryRecord[] = [
     netSalary: 57100,
   },
   {
-    key: '8',
-    employeeId: 'EMP-008',
-    employeeName: 'Jennifer Martinez',
-    department: 'Marketing',
-    designation: 'Marketing Coordinator',
+    key: "8",
+    employeeId: "EMP-008",
+    employeeName: "Jennifer Martinez",
+    department: "Marketing",
+    designation: "Marketing Coordinator",
     basicSalary: 50000,
     houseAllowance: 6000,
     transportAllowance: 2000,
@@ -184,8 +186,11 @@ const demoSalaryRecords: SalaryRecord[] = [
 ];
 
 export default function SalaryManagementPage() {
-  const [salaryRecords, setSalaryRecords] = useState<SalaryRecord[]>(demoSalaryRecords);
-  const [selectedRecord, setSelectedRecord] = useState<SalaryRecord | null>(null);
+  const [salaryRecords, setSalaryRecords] =
+    useState<SalaryRecord[]>(demoSalaryRecords);
+  const [selectedRecord, setSelectedRecord] = useState<SalaryRecord | null>(
+    null
+  );
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [form] = Form.useForm();
@@ -225,22 +230,22 @@ export default function SalaryManagementPage() {
           : record
       );
       setSalaryRecords(updatedRecords);
-      message.success('Salary updated successfully');
+      message.success("Salary updated successfully");
       setIsEditModalOpen(false);
       form.resetFields();
     });
   };
 
-  const getActionItems = (record: SalaryRecord): MenuProps['items'] => [
+  const getActionItems = (record: SalaryRecord): MenuProps["items"] => [
     {
-      key: 'view',
-      label: 'View Details',
+      key: "view",
+      label: "View Details",
       icon: <EyeOutlined />,
       onClick: () => handleView(record),
     },
     {
-      key: 'edit',
-      label: 'Edit Salary',
+      key: "edit",
+      label: "Edit Salary",
       icon: <EditOutlined />,
       onClick: () => handleEdit(record),
     },
@@ -248,8 +253,8 @@ export default function SalaryManagementPage() {
 
   const columns: DynamicTableColumn<SalaryRecord>[] = [
     {
-      title: 'Employee',
-      key: 'employee',
+      title: "Employee",
+      key: "employee",
       width: 220,
       render: (_, record) => (
         <Space>
@@ -265,40 +270,40 @@ export default function SalaryManagementPage() {
       ),
     },
     {
-      title: 'Department',
-      dataIndex: 'department',
-      key: 'department',
+      title: "Department",
+      dataIndex: "department",
+      key: "department",
       width: 130,
       filters: [
-        { text: 'Sales', value: 'Sales' },
-        { text: 'IT', value: 'IT' },
-        { text: 'HR', value: 'HR' },
-        { text: 'Finance', value: 'Finance' },
-        { text: 'Operations', value: 'Operations' },
-        { text: 'Marketing', value: 'Marketing' },
+        { text: "Sales", value: "Sales" },
+        { text: "IT", value: "IT" },
+        { text: "HR", value: "HR" },
+        { text: "Finance", value: "Finance" },
+        { text: "Operations", value: "Operations" },
+        { text: "Marketing", value: "Marketing" },
       ],
       onFilter: (value, record) => record.department === value,
     },
     {
-      title: 'Designation',
-      dataIndex: 'designation',
-      key: 'designation',
+      title: "Designation",
+      dataIndex: "designation",
+      key: "designation",
       width: 180,
     },
     {
-      title: 'Basic Salary',
-      dataIndex: 'basicSalary',
-      key: 'basicSalary',
+      title: "Basic Salary",
+      dataIndex: "basicSalary",
+      key: "basicSalary",
       width: 130,
-      align: 'right',
+      align: "right",
       render: (salary: number) => `$${salary.toLocaleString()}`,
       sorter: (a, b) => a.basicSalary - b.basicSalary,
     },
     {
-      title: 'Total Allowances',
-      key: 'totalAllowances',
+      title: "Total Allowances",
+      key: "totalAllowances",
       width: 150,
-      align: 'right',
+      align: "right",
       render: (_, record) => {
         const total =
           record.houseAllowance +
@@ -306,58 +311,68 @@ export default function SalaryManagementPage() {
           record.medicalAllowance +
           record.otherAllowances;
         return (
-          <Text style={{ color: '#52c41a' }}>
+          <Text style={{ color: "#52c41a" }}>
             <RiseOutlined /> ${total.toLocaleString()}
           </Text>
         );
       },
       sorter: (a, b) => {
-        const totalA = a.houseAllowance + a.transportAllowance + a.medicalAllowance + a.otherAllowances;
-        const totalB = b.houseAllowance + b.transportAllowance + b.medicalAllowance + b.otherAllowances;
+        const totalA =
+          a.houseAllowance +
+          a.transportAllowance +
+          a.medicalAllowance +
+          a.otherAllowances;
+        const totalB =
+          b.houseAllowance +
+          b.transportAllowance +
+          b.medicalAllowance +
+          b.otherAllowances;
         return totalA - totalB;
       },
     },
     {
-      title: 'Total Deductions',
-      key: 'totalDeductions',
+      title: "Total Deductions",
+      key: "totalDeductions",
       width: 150,
-      align: 'right',
+      align: "right",
       render: (_, record) => {
         const total =
           record.taxDeduction +
           record.insuranceDeduction +
           record.otherDeductions;
         return (
-          <Text style={{ color: '#ff4d4f' }}>
+          <Text style={{ color: "#ff4d4f" }}>
             <FallOutlined /> ${total.toLocaleString()}
           </Text>
         );
       },
       sorter: (a, b) => {
-        const totalA = a.taxDeduction + a.insuranceDeduction + a.otherDeductions;
-        const totalB = b.taxDeduction + b.insuranceDeduction + b.otherDeductions;
+        const totalA =
+          a.taxDeduction + a.insuranceDeduction + a.otherDeductions;
+        const totalB =
+          b.taxDeduction + b.insuranceDeduction + b.otherDeductions;
         return totalA - totalB;
       },
     },
     {
-      title: 'Net Salary',
-      dataIndex: 'netSalary',
-      key: 'netSalary',
+      title: "Net Salary",
+      dataIndex: "netSalary",
+      key: "netSalary",
       width: 140,
-      align: 'right',
+      align: "right",
       render: (salary: number) => (
-        <Text strong style={{ fontSize: 14, color: '#1677ff' }}>
+        <Text strong style={{ fontSize: 14, color: "#1677ff" }}>
           ${salary.toLocaleString()}
         </Text>
       ),
       sorter: (a, b) => a.netSalary - b.netSalary,
     },
     {
-      title: 'Actions',
-      key: 'actions',
+      title: "Actions",
+      key: "actions",
       width: 100,
-      fixed: 'right',
-      align: 'center',
+      fixed: "right",
+      align: "center",
       render: (_, record) => (
         <Space>
           <Button
@@ -366,7 +381,10 @@ export default function SalaryManagementPage() {
             size="small"
             onClick={() => handleView(record)}
           />
-          <Dropdown menu={{ items: getActionItems(record) }} trigger={['click']}>
+          <Dropdown
+            menu={{ items: getActionItems(record) }}
+            trigger={["click"]}
+          >
             <Button icon={<MoreOutlined />} size="small" />
           </Dropdown>
         </Space>
@@ -376,7 +394,10 @@ export default function SalaryManagementPage() {
 
   // Calculate summary statistics
   const totalEmployees = salaryRecords.length;
-  const totalBasicSalary = salaryRecords.reduce((sum, r) => sum + r.basicSalary, 0);
+  const totalBasicSalary = salaryRecords.reduce(
+    (sum, r) => sum + r.basicSalary,
+    0
+  );
   const totalAllowances = salaryRecords.reduce(
     (sum, r) =>
       sum +
@@ -398,14 +419,16 @@ export default function SalaryManagementPage() {
       <Form.Item
         name="basicSalary"
         label="Basic Salary"
-        rules={[{ required: true, message: 'Please enter basic salary' }]}
+        rules={[{ required: true, message: "Please enter basic salary" }]}
       >
         <InputNumber
           size="large"
-          style={{ width: '100%' }}
+          style={{ width: "100%" }}
           min={0}
-          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+          formatter={(value) =>
+            `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          }
+          parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
         />
       </Form.Item>
 
@@ -417,10 +440,12 @@ export default function SalaryManagementPage() {
           <Form.Item name="houseAllowance" label="House Allowance">
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
             />
           </Form.Item>
         </Col>
@@ -428,10 +453,12 @@ export default function SalaryManagementPage() {
           <Form.Item name="transportAllowance" label="Transport Allowance">
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
             />
           </Form.Item>
         </Col>
@@ -442,10 +469,12 @@ export default function SalaryManagementPage() {
           <Form.Item name="medicalAllowance" label="Medical Allowance">
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
             />
           </Form.Item>
         </Col>
@@ -453,10 +482,12 @@ export default function SalaryManagementPage() {
           <Form.Item name="otherAllowances" label="Other Allowances">
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
             />
           </Form.Item>
         </Col>
@@ -470,10 +501,12 @@ export default function SalaryManagementPage() {
           <Form.Item name="taxDeduction" label="Tax Deduction">
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
             />
           </Form.Item>
         </Col>
@@ -481,10 +514,12 @@ export default function SalaryManagementPage() {
           <Form.Item name="insuranceDeduction" label="Insurance Deduction">
             <InputNumber
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               min={0}
-              formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
             />
           </Form.Item>
         </Col>
@@ -493,10 +528,12 @@ export default function SalaryManagementPage() {
       <Form.Item name="otherDeductions" label="Other Deductions">
         <InputNumber
           size="large"
-          style={{ width: '100%' }}
+          style={{ width: "100%" }}
           min={0}
-          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          parser={(value) => value!.replace(/\$\s?|(,*)/g, '')}
+          formatter={(value) =>
+            `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          }
+          parser={(value) => value!.replace(/\$\s?|(,*)/g, "") as any}
         />
       </Form.Item>
     </Form>
@@ -516,7 +553,7 @@ export default function SalaryManagementPage() {
               title="Total Employees"
               value={totalEmployees}
               prefix={<TeamOutlined />}
-              valueStyle={{ color: '#1677ff' }}
+              valueStyle={{ color: "#1677ff" }}
             />
           </Card>
         </Col>
@@ -527,7 +564,7 @@ export default function SalaryManagementPage() {
               value={totalBasicSalary}
               precision={0}
               prefix="$"
-              valueStyle={{ color: '#722ed1' }}
+              valueStyle={{ color: "#722ed1" }}
             />
           </Card>
         </Col>
@@ -538,7 +575,7 @@ export default function SalaryManagementPage() {
               value={totalAllowances}
               precision={0}
               prefix="$"
-              valueStyle={{ color: '#52c41a' }}
+              valueStyle={{ color: "#52c41a" }}
             />
           </Card>
         </Col>
@@ -549,7 +586,7 @@ export default function SalaryManagementPage() {
               value={totalNetSalary}
               precision={0}
               prefix="$"
-              valueStyle={{ color: '#1677ff' }}
+              valueStyle={{ color: "#1677ff" }}
             />
           </Card>
         </Col>
@@ -588,8 +625,16 @@ export default function SalaryManagementPage() {
       >
         {selectedRecord && (
           <div>
-            <Space direction="vertical" align="center" style={{ width: '100%', marginBottom: 24 }}>
-              <Avatar size={64} icon={<UserOutlined />} src={selectedRecord.avatar} />
+            <Space
+              direction="vertical"
+              align="center"
+              style={{ width: "100%", marginBottom: 24 }}
+            >
+              <Avatar
+                size={64}
+                icon={<UserOutlined />}
+                src={selectedRecord.avatar}
+              />
               <Title level={4} style={{ margin: 0 }}>
                 {selectedRecord.employeeName}
               </Title>
@@ -622,7 +667,7 @@ export default function SalaryManagementPage() {
               </Descriptions.Item>
 
               <Descriptions.Item label="Total Allowances" span={2}>
-                <Text strong style={{ color: '#52c41a' }}>
+                <Text strong style={{ color: "#52c41a" }}>
                   $
                   {(
                     selectedRecord.houseAllowance +
@@ -644,7 +689,7 @@ export default function SalaryManagementPage() {
               </Descriptions.Item>
 
               <Descriptions.Item label="Total Deductions" span={2}>
-                <Text strong style={{ color: '#ff4d4f' }}>
+                <Text strong style={{ color: "#ff4d4f" }}>
                   $
                   {(
                     selectedRecord.taxDeduction +
@@ -655,7 +700,7 @@ export default function SalaryManagementPage() {
               </Descriptions.Item>
 
               <Descriptions.Item label="Net Salary" span={2}>
-                <Text strong style={{ fontSize: 18, color: '#1677ff' }}>
+                <Text strong style={{ fontSize: 18, color: "#1677ff" }}>
                   ${selectedRecord.netSalary.toLocaleString()}
                 </Text>
               </Descriptions.Item>

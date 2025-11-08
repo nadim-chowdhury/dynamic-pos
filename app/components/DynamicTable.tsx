@@ -1,28 +1,29 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Table, Input, Button, Space, Row, Col, Card, Tag } from 'antd';
-import type { TableProps, ColumnsType } from 'antd/es/table';
+import React, { useState } from "react";
+import { Table, Input, Button, Space, Row, Col, Card, Tag } from "antd";
+import type { TableProps, ColumnsType } from "antd/es/table";
 import {
   SearchOutlined,
   ReloadOutlined,
   DownloadOutlined,
   PlusOutlined,
   FilterOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 export interface DynamicTableColumn<T> {
   title: string;
-  dataIndex: string;
+  dataIndex?: string;
   key: string;
   width?: number | string;
-  fixed?: 'left' | 'right';
+  fixed?: "left" | "right";
   render?: (value: any, record: T, index: number) => React.ReactNode;
   sorter?: boolean | ((a: T, b: T) => number);
   filters?: { text: string; value: string | number | boolean }[];
   onFilter?: (value: any, record: T) => boolean;
   searchable?: boolean;
-  align?: 'left' | 'right' | 'center';
+  align?: "left" | "right" | "center";
+  ellipsis?: boolean;
 }
 
 export interface DynamicTableProps<T> {
@@ -39,14 +40,14 @@ export interface DynamicTableProps<T> {
   onRefresh?: () => void;
   onExport?: () => void;
   onSearch?: (value: string) => void;
-  pagination?: TableProps<T>['pagination'];
-  rowSelection?: TableProps<T>['rowSelection'];
+  pagination?: TableProps<T>["pagination"];
+  rowSelection?: TableProps<T>["rowSelection"];
   rowKey?: string | ((record: T) => string);
-  size?: 'small' | 'middle' | 'large';
+  size?: "small" | "middle" | "large";
   scroll?: { x?: number | string; y?: number | string };
   bordered?: boolean;
   customActions?: React.ReactNode;
-  summary?: TableProps<T>['summary'];
+  summary?: TableProps<T>["summary"];
 }
 
 export default function DynamicTable<T extends Record<string, any>>({
@@ -58,21 +59,25 @@ export default function DynamicTable<T extends Record<string, any>>({
   showRefresh = true,
   showExport = true,
   showAdd = false,
-  addButtonText = 'Add New',
+  addButtonText = "Add New",
   onAdd,
   onRefresh,
   onExport,
   onSearch,
-  pagination = { pageSize: 10, showSizeChanger: true, showTotal: (total) => `Total ${total} items` },
+  pagination = {
+    pageSize: 10,
+    showSizeChanger: true,
+    showTotal: (total) => `Total ${total} items`,
+  },
   rowSelection,
-  rowKey = 'key',
-  size = 'middle',
+  rowKey = "key",
+  size = "middle",
   scroll,
   bordered = false,
   customActions,
   summary,
 }: DynamicTableProps<T>) {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState<T[]>(data);
 
   const handleSearch = (value: string) => {
@@ -97,7 +102,7 @@ export default function DynamicTable<T extends Record<string, any>>({
   };
 
   const handleRefresh = () => {
-    setSearchText('');
+    setSearchText("");
     setFilteredData(data);
     if (onRefresh) {
       onRefresh();
@@ -108,17 +113,18 @@ export default function DynamicTable<T extends Record<string, any>>({
     if (onExport) {
       onExport();
     } else {
-      // Default export to CSV
-      const headers = columns.map((col) => col.title).join(',');
+      // Default export to CSV - only export columns with dataIndex
+      const exportableColumns = columns.filter((col) => col.dataIndex);
+      const headers = exportableColumns.map((col) => col.title).join(",");
       const rows = filteredData.map((record) =>
-        columns.map((col) => record[col.dataIndex] || '').join(',')
+        exportableColumns.map((col) => record[col.dataIndex!] || "").join(",")
       );
-      const csv = [headers, ...rows].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv' });
+      const csv = [headers, ...rows].join("\n");
+      const blob = new Blob([csv], { type: "text/csv" });
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${title || 'table'}-${new Date().getTime()}.csv`;
+      a.download = `${title || "table"}-${new Date().getTime()}.csv`;
       a.click();
     }
   };

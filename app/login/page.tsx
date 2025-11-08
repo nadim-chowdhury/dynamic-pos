@@ -44,8 +44,8 @@ export default function LoginPage() {
         justifyContent: "center",
         background:
           currentTheme === "dark"
-            ? "linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%)"
-            : "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+            ? "linear-gradient(135deg, #1a1a2e 0%, #1a1a2e 100%)"
+            : "linear-gradient(135deg, #f5f7fa 0%, #f5f7fa 100%)",
         padding: "20px",
       }}
     >

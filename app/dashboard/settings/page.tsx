@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Card,
@@ -17,7 +17,7 @@ import {
   InputNumber,
   Upload,
   Radio,
-} from 'antd';
+} from "antd";
 import {
   SaveOutlined,
   UploadOutlined,
@@ -27,7 +27,7 @@ import {
   BellOutlined,
   LockOutlined,
   GlobalOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -66,18 +66,18 @@ interface Settings {
 
 export default function SettingsPage() {
   const [form] = Form.useForm();
-  const [activeTab, setActiveTab] = useState('business');
+  const [activeTab, setActiveTab] = useState("business");
 
   const [settings, setSettings] = useState<Settings>({
-    businessName: 'Dynamic POS Store',
-    businessEmail: 'contact@dynamicpos.com',
-    businessPhone: '+1 (555) 123-4567',
-    businessAddress: '123 Business Street, San Francisco, CA 94105',
-    taxId: '12-3456789',
-    currency: 'USD',
-    timezone: 'America/Los_Angeles',
-    dateFormat: 'MM/DD/YYYY',
-    receiptFooter: 'Thank you for your business!',
+    businessName: "Dynamic POS Store",
+    businessEmail: "contact@dynamicpos.com",
+    businessPhone: "+1 (555) 123-4567",
+    businessAddress: "123 Business Street, San Francisco, CA 94105",
+    taxId: "12-3456789",
+    currency: "USD",
+    timezone: "America/Los_Angeles",
+    dateFormat: "MM/DD/YYYY",
+    receiptFooter: "Thank you for your business!",
     showLogo: true,
     showTax: true,
     emailNotifications: true,
@@ -86,13 +86,13 @@ export default function SettingsPage() {
     lowStockThreshold: 10,
     enableTax: true,
     defaultTaxRate: 10,
-    language: 'en',
+    language: "en",
     autoBackup: true,
   });
 
   const handleSave = (values: any) => {
     setSettings({ ...settings, ...values });
-    message.success('Settings saved successfully');
+    message.success("Settings saved successfully");
   };
 
   return (
@@ -103,49 +103,49 @@ export default function SettingsPage() {
         {/* Settings Navigation */}
         <Col xs={24} md={6}>
           <Card>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space direction="vertical" style={{ width: "100%" }}>
               <Button
                 block
-                type={activeTab === 'business' ? 'primary' : 'text'}
+                type={activeTab === "business" ? "primary" : "text"}
                 icon={<ShopOutlined />}
-                onClick={() => setActiveTab('business')}
-                style={{ textAlign: 'left' }}
+                onClick={() => setActiveTab("business")}
+                style={{ textAlign: "left" }}
               >
                 Business Info
               </Button>
               <Button
                 block
-                type={activeTab === 'receipt' ? 'primary' : 'text'}
+                type={activeTab === "receipt" ? "primary" : "text"}
                 icon={<MailOutlined />}
-                onClick={() => setActiveTab('receipt')}
-                style={{ textAlign: 'left' }}
+                onClick={() => setActiveTab("receipt")}
+                style={{ textAlign: "left" }}
               >
                 Receipt Settings
               </Button>
               <Button
                 block
-                type={activeTab === 'notifications' ? 'primary' : 'text'}
+                type={activeTab === "notifications" ? "primary" : "text"}
                 icon={<BellOutlined />}
-                onClick={() => setActiveTab('notifications')}
-                style={{ textAlign: 'left' }}
+                onClick={() => setActiveTab("notifications")}
+                style={{ textAlign: "left" }}
               >
                 Notifications
               </Button>
               <Button
                 block
-                type={activeTab === 'tax' ? 'primary' : 'text'}
+                type={activeTab === "tax" ? "primary" : "text"}
                 icon={<DollarOutlined />}
-                onClick={() => setActiveTab('tax')}
-                style={{ textAlign: 'left' }}
+                onClick={() => setActiveTab("tax")}
+                style={{ textAlign: "left" }}
               >
                 Tax Settings
               </Button>
               <Button
                 block
-                type={activeTab === 'general' ? 'primary' : 'text'}
+                type={activeTab === "general" ? "primary" : "text"}
                 icon={<GlobalOutlined />}
-                onClick={() => setActiveTab('general')}
-                style={{ textAlign: 'left' }}
+                onClick={() => setActiveTab("general")}
+                style={{ textAlign: "left" }}
               >
                 General
               </Button>
@@ -163,7 +163,7 @@ export default function SettingsPage() {
               initialValues={settings}
             >
               {/* Business Information */}
-              {activeTab === 'business' && (
+              {activeTab === "business" && (
                 <>
                   <Title level={4}>
                     <ShopOutlined /> Business Information
@@ -173,7 +173,9 @@ export default function SettingsPage() {
                   <Form.Item
                     name="businessName"
                     label="Business Name"
-                    rules={[{ required: true, message: 'Please enter business name' }]}
+                    rules={[
+                      { required: true, message: "Please enter business name" },
+                    ]}
                   >
                     <Input size="large" />
                   </Form.Item>
@@ -184,8 +186,14 @@ export default function SettingsPage() {
                         name="businessEmail"
                         label="Business Email"
                         rules={[
-                          { required: true, message: 'Please enter business email' },
-                          { type: 'email', message: 'Please enter valid email' },
+                          {
+                            required: true,
+                            message: "Please enter business email",
+                          },
+                          {
+                            type: "email",
+                            message: "Please enter valid email",
+                          },
                         ]}
                       >
                         <Input size="large" />
@@ -195,7 +203,12 @@ export default function SettingsPage() {
                       <Form.Item
                         name="businessPhone"
                         label="Business Phone"
-                        rules={[{ required: true, message: 'Please enter business phone' }]}
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please enter business phone",
+                          },
+                        ]}
                       >
                         <Input size="large" />
                       </Form.Item>
@@ -205,7 +218,12 @@ export default function SettingsPage() {
                   <Form.Item
                     name="businessAddress"
                     label="Business Address"
-                    rules={[{ required: true, message: 'Please enter business address' }]}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter business address",
+                      },
+                    ]}
                   >
                     <TextArea rows={3} />
                   </Form.Item>
@@ -226,22 +244,36 @@ export default function SettingsPage() {
               )}
 
               {/* Receipt Settings */}
-              {activeTab === 'receipt' && (
+              {activeTab === "receipt" && (
                 <>
                   <Title level={4}>
                     <MailOutlined /> Receipt Settings
                   </Title>
                   <Divider />
 
-                  <Form.Item name="receiptFooter" label="Receipt Footer Message">
-                    <TextArea rows={3} placeholder="Message to display at the bottom of receipts" />
+                  <Form.Item
+                    name="receiptFooter"
+                    label="Receipt Footer Message"
+                  >
+                    <TextArea
+                      rows={3}
+                      placeholder="Message to display at the bottom of receipts"
+                    />
                   </Form.Item>
 
-                  <Form.Item name="showLogo" label="Show Logo on Receipt" valuePropName="checked">
+                  <Form.Item
+                    name="showLogo"
+                    label="Show Logo on Receipt"
+                    valuePropName="checked"
+                  >
                     <Switch />
                   </Form.Item>
 
-                  <Form.Item name="showTax" label="Show Tax Breakdown" valuePropName="checked">
+                  <Form.Item
+                    name="showTax"
+                    label="Show Tax Breakdown"
+                    valuePropName="checked"
+                  >
                     <Switch />
                   </Form.Item>
 
@@ -258,7 +290,7 @@ export default function SettingsPage() {
               )}
 
               {/* Notification Settings */}
-              {activeTab === 'notifications' && (
+              {activeTab === "notifications" && (
                 <>
                   <Title level={4}>
                     <BellOutlined /> Notification Settings
@@ -272,8 +304,16 @@ export default function SettingsPage() {
                   >
                     <Switch />
                   </Form.Item>
-                  <Text type="secondary" style={{ display: 'block', marginTop: -16, marginBottom: 16 }}>
-                    Receive email notifications for sales, inventory updates, and system alerts
+                  <Text
+                    type="secondary"
+                    style={{
+                      display: "block",
+                      marginTop: -16,
+                      marginBottom: 16,
+                    }}
+                  >
+                    Receive email notifications for sales, inventory updates,
+                    and system alerts
                   </Text>
 
                   <Form.Item
@@ -283,7 +323,14 @@ export default function SettingsPage() {
                   >
                     <Switch />
                   </Form.Item>
-                  <Text type="secondary" style={{ display: 'block', marginTop: -16, marginBottom: 16 }}>
+                  <Text
+                    type="secondary"
+                    style={{
+                      display: "block",
+                      marginTop: -16,
+                      marginBottom: 16,
+                    }}
+                  >
                     Receive SMS notifications for critical alerts
                   </Text>
 
@@ -300,20 +347,24 @@ export default function SettingsPage() {
                     label="Low Stock Threshold"
                     tooltip="Notify when stock falls below this number"
                   >
-                    <InputNumber min={1} max={100} style={{ width: '100%' }} />
+                    <InputNumber min={1} max={100} style={{ width: "100%" }} />
                   </Form.Item>
                 </>
               )}
 
               {/* Tax Settings */}
-              {activeTab === 'tax' && (
+              {activeTab === "tax" && (
                 <>
                   <Title level={4}>
                     <DollarOutlined /> Tax Settings
                   </Title>
                   <Divider />
 
-                  <Form.Item name="enableTax" label="Enable Tax" valuePropName="checked">
+                  <Form.Item
+                    name="enableTax"
+                    label="Enable Tax"
+                    valuePropName="checked"
+                  >
                     <Switch />
                   </Form.Item>
 
@@ -326,26 +377,36 @@ export default function SettingsPage() {
                       min={0}
                       max={100}
                       precision={2}
-                      style={{ width: '100%' }}
+                      style={{ width: "100%" }}
                       formatter={(value) => `${value}%`}
                     />
                   </Form.Item>
 
-                  <Form.Item name="taxCalculation" label="Tax Calculation Method">
+                  <Form.Item
+                    name="taxCalculation"
+                    label="Tax Calculation Method"
+                  >
                     <Select size="large">
-                      <Option value="inclusive">Tax Inclusive (price includes tax)</Option>
-                      <Option value="exclusive">Tax Exclusive (tax added to price)</Option>
+                      <Option value="inclusive">
+                        Tax Inclusive (price includes tax)
+                      </Option>
+                      <Option value="exclusive">
+                        Tax Exclusive (tax added to price)
+                      </Option>
                     </Select>
                   </Form.Item>
 
                   <Form.Item name="taxNumber" label="Tax Registration Number">
-                    <Input size="large" placeholder="Enter tax registration number" />
+                    <Input
+                      size="large"
+                      placeholder="Enter tax registration number"
+                    />
                   </Form.Item>
                 </>
               )}
 
               {/* General Settings */}
-              {activeTab === 'general' && (
+              {activeTab === "general" && (
                 <>
                   <Title level={4}>
                     <GlobalOutlined /> General Settings
@@ -381,10 +442,18 @@ export default function SettingsPage() {
                     <Col span={12}>
                       <Form.Item name="timezone" label="Timezone">
                         <Select size="large" showSearch>
-                          <Option value="America/New_York">Eastern Time (ET)</Option>
-                          <Option value="America/Chicago">Central Time (CT)</Option>
-                          <Option value="America/Denver">Mountain Time (MT)</Option>
-                          <Option value="America/Los_Angeles">Pacific Time (PT)</Option>
+                          <Option value="America/New_York">
+                            Eastern Time (ET)
+                          </Option>
+                          <Option value="America/Chicago">
+                            Central Time (CT)
+                          </Option>
+                          <Option value="America/Denver">
+                            Mountain Time (MT)
+                          </Option>
+                          <Option value="America/Los_Angeles">
+                            Pacific Time (PT)
+                          </Option>
                           <Option value="Europe/London">GMT</Option>
                         </Select>
                       </Form.Item>
@@ -400,10 +469,21 @@ export default function SettingsPage() {
                     </Col>
                   </Row>
 
-                  <Form.Item name="autoBackup" label="Automatic Backup" valuePropName="checked">
+                  <Form.Item
+                    name="autoBackup"
+                    label="Automatic Backup"
+                    valuePropName="checked"
+                  >
                     <Switch />
                   </Form.Item>
-                  <Text type="secondary" style={{ display: 'block', marginTop: -16, marginBottom: 16 }}>
+                  <Text
+                    type="secondary"
+                    style={{
+                      display: "block",
+                      marginTop: -16,
+                      marginBottom: 16,
+                    }}
+                  >
                     Automatically backup data daily at midnight
                   </Text>
                 </>
@@ -413,7 +493,12 @@ export default function SettingsPage() {
 
               <Form.Item>
                 <Space>
-                  <Button type="primary" htmlType="submit" icon={<SaveOutlined />} size="large">
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    icon={<SaveOutlined />}
+                    size="large"
+                  >
                     Save Settings
                   </Button>
                   <Button size="large" onClick={() => form.resetFields()}>
