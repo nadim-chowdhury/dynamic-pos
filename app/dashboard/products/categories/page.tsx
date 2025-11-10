@@ -369,7 +369,12 @@ export default function CategoriesPage() {
         width={600}
         footer={null}
       >
-        <CategoryForm onFinish={handleCreateCategory} />
+        <CategoryForm
+          form={form}
+          onFinish={handleCreateCategory}
+          onCancel={handleCancelForm}
+          selectedCategory={null}
+        />
       </DynamicModal>
 
       {/* Edit Category Modal */}
@@ -383,7 +388,12 @@ export default function CategoriesPage() {
         width={600}
         footer={null}
       >
-        <CategoryForm onFinish={handleUpdateCategory} />
+        <CategoryForm
+          form={form}
+          onFinish={handleUpdateCategory}
+          onCancel={handleCancelForm}
+          selectedCategory={selectedCategory}
+        />
       </DynamicModal>
     </div>
   );

@@ -146,6 +146,89 @@ const demoBrands: Brand[] = [
   },
 ];
 
+// BrandForm component - moved outside to avoid recreation on render
+interface BrandFormProps {
+  form: any;
+  onFinish: (values: any) => void;
+  onCancel: () => void;
+  selectedBrand: Brand | null;
+}
+
+const BrandForm: React.FC<BrandFormProps> = ({
+  form,
+  onFinish,
+  onCancel,
+  selectedBrand,
+}) => (
+  <Form
+    form={form}
+    layout="vertical"
+    onFinish={onFinish}
+    initialValues={{ status: true }}
+  >
+    <Form.Item
+      name="code"
+      label="Brand Code"
+      rules={[
+        { required: true, message: "Please enter brand code" },
+        { max: 10, message: "Code must be maximum 10 characters" },
+      ]}
+    >
+      <Input placeholder="e.g., LOGI" style={{ textTransform: "uppercase" }} />
+    </Form.Item>
+
+    <Form.Item
+      name="name"
+      label="Brand Name"
+      rules={[{ required: true, message: "Please enter brand name" }]}
+    >
+      <Input placeholder="Enter brand name" />
+    </Form.Item>
+
+    <Form.Item name="description" label="Description">
+      <TextArea rows={2} placeholder="Enter brand description (optional)" />
+    </Form.Item>
+
+    <Form.Item name="website" label="Website">
+      <Input placeholder="https://www.example.com" />
+    </Form.Item>
+
+    <Form.Item
+      name="email"
+      label="Email"
+      rules={[{ type: "email", message: "Please enter a valid email" }]}
+    >
+      <Input placeholder="contact@brand.com" />
+    </Form.Item>
+
+    <Form.Item name="phone" label="Phone">
+      <Input placeholder="+1-XXX-XXX-XXXX" />
+    </Form.Item>
+
+    <Form.Item name="logo" label="Brand Logo">
+      <Upload listType="picture-card" maxCount={1}>
+        <div>
+          <UploadOutlined />
+          <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+      </Upload>
+    </Form.Item>
+
+    <Form.Item name="status" label="Status" valuePropName="checked">
+      <Switch checkedChildren="Active" unCheckedChildren="Inactive" />
+    </Form.Item>
+
+    <Form.Item>
+      <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+        <Button onClick={onCancel}>Cancel</Button>
+        <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
+          {selectedBrand ? "Update Brand" : "Create Brand"}
+        </Button>
+      </Space>
+    </Form.Item>
+  </Form>
+);
+
 export default function BrandsPage() {
   const [brands, setBrands] = useState<Brand[]>(demoBrands);
   const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
@@ -395,86 +478,11 @@ export default function BrandsPage() {
     setIsEditModalOpen(false);
   };
 
-  const BrandForm = ({ onFinish }: { onFinish: (values: any) => void }) => (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-      initialValues={{ status: true }}
-    >
-      <Form.Item
-        name="code"
-        label="Brand Code"
-        rules={[
-          { required: true, message: "Please enter brand code" },
-          { max: 10, message: "Code must be maximum 10 characters" },
-        ]}
-      >
-        <Input
-          placeholder="e.g., LOGI"
-          style={{ textTransform: "uppercase" }}
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="name"
-        label="Brand Name"
-        rules={[{ required: true, message: "Please enter brand name" }]}
-      >
-        <Input placeholder="Enter brand name" />
-      </Form.Item>
-
-      <Form.Item name="description" label="Description">
-        <TextArea rows={2} placeholder="Enter brand description (optional)" />
-      </Form.Item>
-
-      <Form.Item name="website" label="Website">
-        <Input placeholder="https://www.example.com" />
-      </Form.Item>
-
-      <Form.Item
-        name="email"
-        label="Email"
-        rules={[{ type: "email", message: "Please enter a valid email" }]}
-      >
-        <Input placeholder="contact@brand.com" />
-      </Form.Item>
-
-      <Form.Item name="phone" label="Phone">
-        <Input placeholder="+1-XXX-XXX-XXXX" />
-      </Form.Item>
-
-      <Form.Item name="logo" label="Brand Logo">
-        <Upload listType="picture-card" maxCount={1}>
-          <div>
-            <UploadOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
-          </div>
-        </Upload>
-      </Form.Item>
-
-      <Form.Item name="status" label="Status" valuePropName="checked">
-        <Switch checkedChildren="Active" unCheckedChildren="Inactive" />
-      </Form.Item>
-
-      <Form.Item>
-        <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-          <Button
-            onClick={() => {
-              setIsCreateModalOpen(false);
-              setIsEditModalOpen(false);
-              form.resetFields();
-            }}
-          >
-            Cancel
-          </Button>
-          <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
-            {selectedBrand ? "Update Brand" : "Create Brand"}
-          </Button>
-        </Space>
-      </Form.Item>
-    </Form>
-  );
+  const handleCancelForm = () => {
+    setIsCreateModalOpen(false);
+    setIsEditModalOpen(false);
+    form.resetFields();
+  };
 
   return (
     <div>
@@ -611,7 +619,12 @@ export default function BrandsPage() {
         width={700}
         footer={null}
       >
-        <BrandForm onFinish={handleCreateBrand} />
+        <BrandForm
+          form={form}
+          onFinish={handleCreateBrand}
+          onCancel={handleCancelForm}
+          selectedBrand={null}
+        />
       </DynamicModal>
 
       {/* Edit Brand Modal */}
@@ -625,7 +638,12 @@ export default function BrandsPage() {
         width={700}
         footer={null}
       >
-        <BrandForm onFinish={handleUpdateBrand} />
+        <BrandForm
+          form={form}
+          onFinish={handleUpdateBrand}
+          onCancel={handleCancelForm}
+          selectedBrand={selectedBrand}
+        />
       </DynamicModal>
     </div>
   );
