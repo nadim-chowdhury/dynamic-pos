@@ -141,7 +141,7 @@ export default function RegisterPage() {
             />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="phone"
             label="Phone Number"
             rules={[
@@ -153,7 +153,7 @@ export default function RegisterPage() {
               placeholder="Enter your phone number"
               size="large"
             />
-          </Form.Item>
+          </Form.Item> */}
 
           <div className="flex items-baseline justify-center gap-4">
             <Form.Item
@@ -213,13 +213,17 @@ export default function RegisterPage() {
         <Divider plain>Or sign up with</Divider>
 
         <div
-          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
         >
           <Space direction="horizontal" size="middle">
-            <Button block size="large" icon={<GoogleOutlined />}>
+            <Button block size="small" icon={<GoogleOutlined />}>
               Sign up with Google
             </Button>
-            <Button block size="large" icon={<GithubOutlined />}>
+            <Button block size="small" icon={<GithubOutlined />}>
               Sign up with GitHub
             </Button>
           </Space>
